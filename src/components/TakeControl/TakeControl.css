@@ -1,0 +1,30 @@
+.control {
+      background-color: #EBEFFF;
+      align-items: center;
+      margin-top: -10px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding-bottom: 40px;
+}
+
+.control h1 {
+    font-size: 48px;
+    font-family: Montserrat;
+}
+
+.control p {
+    font-size: 24px;
+}
+
+.start-btn {
+    background-color: #002CCC;
+    color: #fff;
+    width: 240px;
+    height: 60px;
+    font-size: 20px;
+    border-radius: 15px;
+    border: none;
+    align-items: center;
+    margin-top: 20px;
+}

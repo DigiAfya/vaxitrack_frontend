@@ -1,0 +1,17 @@
+.trust-card {
+    background-color: #EBEFFF;
+    height: 140px;
+    width: 80%;
+    border-radius: 20px;
+    align-items: center;
+    display: flex;
+}
+
+.trust-card img {
+    width: 60px;
+}
+
+.trust-card p {
+    color: #2A2A2A;
+    font-size: 20px;
+}

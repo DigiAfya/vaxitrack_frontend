@@ -1,0 +1,23 @@
+.solution-container{
+    background-color: #EBEFFF;
+    margin-top: 40px;
+
+}
+
+.solution-container {
+    padding-top: 80px;
+}
+
+.solution-container h2{
+    text-align: center;
+    font-size: 36px;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 100px;
+    padding-right: 60px;
+    height: 333px;
+}
+
