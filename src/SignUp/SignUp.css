@@ -1,0 +1,1140 @@
+@font-face {
+  font-family: 'Montserrat Subrayada';
+  src: url("../assets/fonts/MontserratSubrayada-Regular.ttf") format("truetype");
+  font-weight: 700
+}
+
+@font-face {
+  font-family: 'Montserrat Light';
+  src: url("../assets/fonts/Montserrat-Regular.ttf") format("truetype");
+  font-weight: 400
+}
+
+@font-face {
+  font-family: 'Montserrat-Medium';
+  src: url("../assets/fonts/Montserrat-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: url("../assets/fonts/Montserrat-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'Montserrat-SemiBold';
+  src: url("../assets/fonts/Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 600
+}
+
+@media (min-width: 80px) and (min-height: 800px) {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 1440px) and (max-height: 146.625rem) {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #FFFFFF;
+  color: #000000;
+}
+
+.signup-page {
+  display: flex;
+  flex-direction: row;
+  padding: 2.5rem;
+  gap: 1.25rem;
+  background-color: #FFFFFF;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.signup-left {
+  background-color: #002CCC;
+  padding-top: 1.875rem;
+  padding-right: 5rem;
+  padding-left: 5rem;
+  padding-bottom: 5rem;
+  min-height: 100%;
+  border-radius: 30px;
+  gap: 4.375rem;
+  width: 100%;
+  max-width: 31.25rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+#left-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #FFFFFF;
+  gap: 1.25rem;
+}
+
+#VaxT {
+  display: flex;
+  flex-direction: column;
+  gap: .3125rem;
+  height: 5.125rem;
+  width: 31.875rem;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#logo {
+  width: 8.75rem;
+  height: 20px;
+  transform: rotate(0deg);
+  opacity: 1;
+  gap: 5px;
+  display: flex;
+}
+
+#sign-image {
+  width: 31.875rem;
+  height: 41.6875rem;
+  border-radius: 15px;
+  object-fit: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#signup-description {
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.signup-right {
+  width: 100%;
+  max-width: 41.875rem;
+  min-height: 100%;
+  gap: 10px;
+  transform: rotate(0deg);
+  opacity: 1;
+  padding-top: 0px;
+  padding-right: 40px;
+  padding-bottom: 5px;
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+#signup-header {
+  width: 590px;
+  height: 89px;
+  gap: .8125rem;
+  transform: rotate(0deg);
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#create-account {
+  font-family: 'Montserrat-SemiBold';
+  font-weight: 600;
+  font-size: 2.25rem;
+  line-height: 3.375rem;
+  letter-spacing: 0%;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#createA {
+  width: 36.875rem;
+  height: 3.375rem;
+
+}
+
+#signup-header p {
+  margin-top: 0;
+
+  font-family: 'Montserrat-Medium', sans-serif;
+}
+
+#signup-form {
+  width: 590px;
+  height: 33.092rem;
+  gap: 20px;
+  transform: rotate(0deg);
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-form label:first-child {
+  margin-top: 20px;
+}
+
+.form-name {
+  width: 36.875rem;
+  transform: rotate(0deg);
+  opacity: 1;
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-weight: 500;
+}
+
+#fullname {
+  width: 36.875rem;
+  height: 3.125rem;
+  padding: .9375rem;
+  padding-right: 2.8125rem;
+  gap: 2.75rem;
+  transform: rotate(0deg);
+  opacity: 1;
+  border: none;
+  background-color: #F5F5F5;
+  border-radius: .9375rem;
+  display: flex;
+  margin-bottom: 1.875rem;
+  color: #8F8F8F;
+}
+
+#fullname:focus {
+  outline: none;
+  border: 2px solid #002CCC;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.signup-form #email {
+  width: 36.875rem;
+  height: 3.125rem;
+  padding: .9375rem;
+  padding-left: 2.5rem;
+  gap: 2.75rem;
+  transform: rotate(0deg);
+  opacity: 1;
+  border: none;
+  background-color: #F5F5F5;
+  border-radius: .9375rem;
+  display: flex;
+  margin-bottom: 1.875rem;
+  color: #8F8F8F;
+}
+
+.signup-form #email:focus {
+  outline: none;
+  border: 2px solid #002CCC;
+}
+
+.emailA {
+  width: 36.875rem;
+  transform: rotate(0deg);
+  opacity: 1;
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-weight: 500
+}
+
+.input-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+#password {
+  width: 36.875rem;
+  height: 3.125rem;
+  padding: .9375rem;
+  padding-right: 2.8125rem;
+  gap: 2.75rem;
+  transform: rotate(0deg);
+  opacity: 1;
+  border: none;
+  background-color: #F5F5F5;
+  border-radius: .9375rem;
+  display: flex;
+  color: #8F8F8F;
+}
+
+#password:focus {
+  outline: none;
+  border: 2px solid #002CCC;
+}
+
+.password-input-wrapper {
+  position: relative;
+  width: 36.875rem;
+}
+
+.password-toggle {
+  position: absolute;
+  right: .75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+#password-help {
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-size: .75rem;
+  font-weight: 500;
+  line-height: 1.125rem;
+  letter-spacing: 0%;
+  width: 17.375rem;
+  height: 1.75rem;
+  padding-top: 5px;
+  padding-bottom: .3125rem;
+  gap: .625rem;
+  color: #8F8F8F;
+}
+
+.Pass {
+  width: 36.875rem;
+  transform: rotate(0deg);
+  opacity: 1;
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-weight: 500;
+}
+
+#message {
+  display: none;
+  background: #E0E0E0;
+  color: red;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+
+}
+
+#message p {
+  padding: .625rem 2.1875rem;
+  font-size: .625rem;
+  font-family: 'Montserrat-Medium';
+  font-weight: 500;
+
+}
+
+.valid {
+  color: #002CCC;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "&#10004;";
+}
+
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "&#10006;";
+}
+
+#confirm-password {
+  width: 36.875rem;
+  height: 3.125rem;
+  padding: .9375rem;
+  padding-right: 2.8125rem;
+  gap: 2.75rem;
+  transform: rotate(0deg);
+  opacity: 1;
+  border: none;
+  background-color: #F5F5F5;
+  border-radius: .9375rem;
+  display: flex;
+  margin-bottom: 10px;
+  color: #8F8F8F;
+}
+
+#confirm-password:focus {
+  outline: none;
+  border: 2px solid #002CCC;
+}
+
+.signup-form label {
+  display: block;
+  margin-bottom: .625rem;
+}
+
+.signup-form label::after {
+  content: " *";
+  color: red;
+}
+
+/* Remove asterisk from checkbox label */
+.signup-form label[for="terms"]::after {
+  content: "" !important;
+}
+
+.signup-form input {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  width: 36.875rem;
+  height: 3.75rem;
+  gap: 20px;
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-weight: 500;
+  margin-bottom: 2.5rem;
+}
+
+/* Ensure checkbox and its label sit on the same line despite global label/input rules */
+.checkbox-container input,
+.checkbox-container label {
+  display: inline-block;
+  margin: 0;
+}
+
+#terms {
+  width: 1.8638rem;
+  height: 1.8638rem;
+  top: .0681rem;
+  left: .0681rem;
+  border: .2725rem solid;
+  border-color: #8F8F8F;
+  border-radius: .3125rem;
+  background-color: #FFFFFF;
+  transition: all 0.2s ease;
+  appearance: none;
+  /* remove default style */
+  -webkit-appearance: none;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#terms:checked {
+  border-color: #8F8F8F;
+  /* your brand blue */
+}
+
+#terms:checked::after {
+  content: "";
+  position: absolute;
+  left: .5rem;
+  top: .125rem;
+  width: 0.35rem;
+  height: 0.8rem;
+  border: #002CCC solid;
+  border-width: 0 .1563rem .1563rem 0;
+  /* thin tick */
+  transform: rotate(45deg);
+}
+
+.checkbox-container a {
+  color: #002CCC;
+  text-decoration: none;
+}
+
+.checkbox-container a:hover {
+  text-decoration: underline;
+  color: red;
+}
+
+.checkbox-container a:active {
+  color: #CBE5C7;
+}
+
+.button-container {
+  max-width: 36.875rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 18rem;
+  gap: 2.5rem;
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-weight: 500;
+}
+
+.signin-btn {
+  width: 100%;
+  height: 3.75rem;
+  background-color: #002CCC;
+  color: #FFFFFF;
+  border: none;
+  border-radius: .9375rem;
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  letter-spacing: 0%;
+  text-align: center;
+  cursor: pointer;
+  padding-top: .625rem;
+  padding-right: 2.8125rem;
+  padding-bottom: .625rem;
+  padding-left: 1.25rem;
+  margin-bottom: -0.9375rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .9375rem;
+  transition: background-color 7s ease, color 7s ease;
+}
+
+.signin-btn .btn-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+}
+
+.signin-btn.clicked {
+  background-color: #A3A3A3;
+  transition: none;
+}
+
+.signin-btn.clicked span {
+  color: #E0E0E0;
+  transition: none;
+}
+
+.btn-icon {
+  color: #FFFFFF
+}
+
+.custom-modal,
+#customModal,
+#custom-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.35);
+  z-index: 1000;
+}
+
+.custom-modal-content {
+  width: 100%;
+  max-width: 34rem;
+  height: auto;
+  max-height: 650px;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.96);
+  border-radius: 20px;
+  padding: 3.75rem;
+  position: relative;
+  transform: translateY(-12px);
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  font-weight: 600;
+}
+
+.success-icon {
+  width: 4rem;
+  height: 4rem;
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.custom-modal-content h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.custom-modal-content h5 {
+  margin-top: 0;
+  text-align: left;
+}
+
+.custom-modal-content section {
+  margin: 1rem 0;
+  background-color: #EBEFFF;
+  border: 2px solid #C2CFFF;
+  border-radius: 10px;
+  padding: .875rem 1rem;
+  text-align: left;
+}
+
+.custom-modal-content ol {
+  margin: .5rem 0 0;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: next-step;
+  text-align: left;
+}
+
+.custom-modal-content li {
+  counter-increment: next-step;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: .625rem;
+  margin-bottom: .5rem;
+}
+
+.custom-modal-content li:last-child {
+  margin-bottom: 10px;
+}
+
+.custom-modal-content li::before {
+  content: counter(next-step);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: #002CCC;
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  font-size: .875rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.custom-modal-content .signin-btn {
+  width: 100%;
+  margin-top: 0;
+  background-color: #002CCC;
+  color: #FFFFFF;
+  border: none;
+  border-radius: .9375rem;
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  text-align: center;
+  padding-top: .625rem;
+  padding-right: 1.25rem;
+  padding-bottom: .625rem;
+  padding-left: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-modal-content .close {
+  position: absolute;
+  top: .75rem;
+  right: .875rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Google button: place icon inside button next to text */
+.google-btn {
+  width: 100%;
+  height: 3.75rem;
+  border-radius: .9375rem;
+  border: 1px solid #E6E6E6;
+  background: #FFFFFF;
+  color: #000000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+  padding: .5rem 1rem;
+  cursor: pointer;
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-weight: 600;
+  padding-right: 2.8125rem;
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+#or {
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  letter-spacing: 0%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  color: #8F8F8F;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#or::before,
+#or::after {
+  content: "";
+  width: 200px;
+  height: 0px;
+  border: 1px solid #8F8F8F;
+  transform: rotate(-0deg);
+}
+
+.google-btn {
+  width: 100%;
+  height: 3.75rem;
+  background-color: #FFFFFF;
+  color: #002CCC;
+  border: 1px solid #002CCC;
+  border-radius: .9375rem;
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  letter-spacing: 0%;
+  text-align: center;
+  cursor: pointer;
+  padding-top: .625rem;
+  padding-right: 1.25rem;
+  padding-bottom: .625rem;
+  padding-left: 1.25rem;
+  gap: 1.25rem;
+  margin-top: -0.9375rem;
+}
+
+#account {
+  width: 100%;
+  height: 3.75rem;
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.875rem;
+  letter-spacing: 0%;
+  text-align: center;
+  padding-top: .3125rem;
+  padding-bottom: .3125rem;
+  gap: .625rem;
+  color: #2A2A2A;
+  font-size: 1.25rem;
+}
+
+#account a {
+  color: #002CCC;
+  text-decoration: none;
+}
+
+#account a:hover {
+  text-decoration: underline;
+  color: red;
+}
+
+.foot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  max-height: 28.9375rem;
+  padding-top: 1.25rem;
+  padding-right: 80px;
+  padding-bottom: 2.5rem;
+  gap: 2.5rem;
+  background-color: #002CCC;
+  color: #FFFFFF;
+  position: static;
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 85rem;
+  flex-wrap: inherit;
+}
+
+.help {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding-bottom: 2.5rem;
+  width: 100%;
+  max-width: 25rem;
+  height: 100vh;
+  max-height: 21.4375rem;
+  margin-right: 5rem;
+}
+
+#need-help-header {
+  max-width: 25rem;
+  max-height: 3.75rem;
+  height: 100%;
+  width: 100%;
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  letter-spacing: 0%;
+  vertical-align: middle;
+}
+
+#NeedHelp p {
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  font-size: .875rem;
+  line-height: 1.3125rem;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  width: 100%;
+  max-width: 25rem;
+  height: 100%;
+  max-height: 3.9375rem;
+  color: #E0E0E0
+}
+
+#NeedHelp a {
+  color: #9ece97;
+  text-decoration: none;
+}
+
+.contact-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 13.1875rem;
+  height: 100vh;
+  max-height: 3.75rem;
+  background-color: #002CCC;
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: .9375rem;
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.875rem;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  padding-top: .625rem;
+  padding-right: 1.25rem;
+  padding-bottom: .625rem;
+  padding-left: 1.25rem;
+  gap: 1.25rem;
+}
+
+.Information {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 25rem;
+  max-height: 16.5625rem;
+  height: 100vh;
+  padding-bottom: 5rem;
+  gap: 2.5rem;
+  margin-right: 6rem;
+}
+
+#Information1 {
+  max-height: 89px;
+  height: 100vh;
+  gap: .625rem;
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  font-weight: 600;
+  font-size: .875rem;
+  line-height: 1.3125rem;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  list-style: none;
+}
+
+#Information2 {
+  max-height: 89px;
+  height: 100vh;
+  gap: .625rem;
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  font-weight: 600;
+  font-size: .875rem;
+  line-height: 1.3125rem;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #E0E0E0;
+  list-style: none;
+}
+
+#Information1 a {
+  text-decoration: none;
+  color: #E0E0E0
+}
+
+#Information2 a {
+  text-decoration: none;
+  color: #E0E0E0
+}
+
+#motto {
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  font-weight: 600;
+  font-size: .875rem;
+  line-height: 1.3125rem;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  max-width: 25rem;
+  width: 100%;
+  height: 100vh;
+  max-height: 5.625rem
+}
+
+#copy {
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  font-weight: 600;
+  font-size: .875rem;
+  line-height: 1.3125rem;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  max-width: 25rem;
+  width: 100%;
+  height: 100vh;
+  max-height: 5.625rem;
+  color: #8F8F8F;
+}
+
+@media (max-width: 900px) {
+  .signin-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .signup-page {
+    padding: 1.5rem;
+  }
+
+  .signup-right {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  #signup-header,
+  #createA,
+  .signup-form,
+  .form-name,
+  .emailA,
+  .Pass,
+  .password-input-wrapper,
+  #fullname,
+  .signup-form #email,
+  #password,
+  #confirm-password,
+  .checkbox-container,
+  .button-container {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+
+/* Responsive: mobile-first adjustments and fluid elements */
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Stack signup columns on small screens */
+@media (max-width: 900px) {
+  .signup-page {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .signup-right {
+    width: 100%;
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 0 1rem 1rem;
+    display: flex;
+  }
+
+  .signup-left,
+  .foot,
+  footer {
+    display: none;
+  }
+
+  #sign-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-top: .75rem;
+  }
+
+  #logo {
+    width: 6.25rem;
+  }
+
+  #signup-header {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  #signup-header,
+  #createA,
+  #signup-form,
+  .signup-form,
+  .form-name,
+  .emailA,
+  .Pass,
+  .password-input-wrapper,
+  .button-container,
+  .signup-form #email,
+  #fullname,
+  #password,
+  #confirm-password,
+  .checkbox-container,
+  #password-help,
+  #account {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .input-wrapper {
+    width: 100%;
+  }
+
+  .signup-form .input-wrapper,
+  .signup-form .password-input-wrapper {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .signup-form #fullname,
+  .signup-form #email,
+  .signup-form #password,
+  .signup-form #confirm-password {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 3.25rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    padding: .9375rem;
+    padding-right: 2.8125rem;
+    box-sizing: border-box;
+    border-radius: .9375rem;
+  }
+
+  .signup-form #email {
+    padding-left: 2.5rem;
+  }
+
+  .signin-btn,
+  .google-btn {
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .button-container {
+    height: auto;
+    gap: 1rem;
+  }
+
+  #or {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+/* Very small phones tweaks */
+@media (max-width: 420px) {
+  #create-account {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  #signup-header p {
+    font-size: .875rem;
+    line-height: 1.25rem;
+  }
+
+  .signup-form label,
+  #password-help,
+  .checkbox-container,
+  #account {
+    font-size: .875rem;
+    line-height: 1.25rem;
+  }
+
+  #fullname,
+  .signup-form #email,
+  #password,
+  #confirm-password,
+  .signin-btn,
+  .google-btn {
+    height: 3.25rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .signin-btn,
+  .google-btn {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #or {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .input-icon {
+    left: 8px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .signup-form #email {
+    padding-left: 2.25rem;
+  }
+
+  .checkbox-container {
+    gap: 12px;
+    padding-right: 1rem;
+  }
+}

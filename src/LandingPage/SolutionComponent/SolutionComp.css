@@ -1,0 +1,24 @@
+.solution-comp {
+    width: 100%;
+    max-width: 22.5rem;
+}
+
+.solution-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.solution-title {
+    font-family: 'Montserrat-SemiBold', sans-serif;
+    margin: 0.75rem 0 0;
+    padding-left: 0;
+    font-size: 1.25rem;
+}
+
+.solution-text {
+    font-family: 'Montserrat-Medium', sans-serif;
+    width: 100%;
+    padding-left: 0;
+    font-size: 1.125rem;
+    line-height: 1.5;
+}

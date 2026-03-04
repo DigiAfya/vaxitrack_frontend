@@ -1,0 +1,48 @@
+.section-why {
+    padding: 3.5rem 1.25rem 0;
+}
+
+.section-why h2 {
+    font-family: 'Montserrat-SemiBold', sans-serif;
+    font-size: 2.375rem;
+    text-align: center;
+    margin: 0;
+}
+
+.section-why p {
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-size: 1.25rem;
+    text-align: center;
+    margin: 1rem auto 0;
+    max-width: 62rem;
+}
+
+.search-section {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.875rem;
+}
+
+.card h3 {
+    font-family: 'Montserrat-SemiBold', sans-serif;
+    font-size: 22px;
+}
+
+.card p {
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-size: 1.125rem;
+    width: 100%;
+    max-width: 18.75rem;
+}
+
+@media (max-width: 48rem) {
+    .section-why h2 {
+        font-size: 1.875rem;
+    }
+
+    .section-why p {
+        font-size: 1rem;
+    }
+}

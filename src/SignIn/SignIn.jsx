@@ -1,0 +1,186 @@
+import { Link } from 'react-router-dom';
+import { useRef, useState } from 'react';
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
+import '../General/App.css';
+import '../General/index.css';
+import './SignIn.css';
+import whiteLogo from '../public/pictures/WhiteLogo.svg';
+import signInImage from '../public/pictures/SignInPic.svg';
+import messageIcon from '../public/pictures/Message.svg';
+import eyeOpenedIcon from '../public/pictures/eyeOpened.svg';
+import eyeClosedIcon from '../public/pictures/eyeClosed.svg';
+import googleIcon from '../public/pictures/google.svg';
+
+export function SignIn() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState('');
+  const [signInClicked, setSignInClicked] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const formRef = useRef(null);
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID?.trim() ?? '';
+  const hasGoogleClientId = googleClientId.length > 0;
+
+  const startGoogleLogin = useGoogleLogin({
+    scope: 'openid email profile',
+    onSuccess: async (tokenResponse) => {
+      try {
+        const response = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: {
+            Authorization: `Bearer ${tokenResponse.access_token}`,
+          },
+        });
+
+        const googleUser = response.data;
+        window.localStorage.setItem('googleUser', JSON.stringify(googleUser));
+        window.alert(`Signed in with Google as ${googleUser.email}.`);
+      } catch {
+        window.alert('Google sign-in succeeded, but user profile could not be loaded.');
+      } finally {
+        setGoogleLoading(false);
+      }
+    },
+    onError: () => {
+      setGoogleLoading(false);
+      window.alert('Google sign-in failed. Please try again.');
+    },
+    onNonOAuthError: () => {
+      setGoogleLoading(false);
+      window.alert('Google sign-in was cancelled or could not be completed.');
+    },
+  });
+
+  function handleGoogleSignIn() {
+    if (!hasGoogleClientId) {
+      window.alert('Google sign-in is not configured yet. Add VITE_GOOGLE_CLIENT_ID to your .env file.');
+      return;
+    }
+
+    setGoogleLoading(true);
+    startGoogleLogin();
+  }
+
+  function handleSignIn() {
+    setSignInClicked(true);
+    if (!formRef.current?.reportValidity()) {
+      setTimeout(() => setSignInClicked(false), 7000);
+    }
+  }
+
+  return (
+    <div className="container">
+      <div className="content">
+        <div className="signIn-left">
+          <section id="TopLeft">
+            <div id="VT">
+              <Link to="/">
+                <img src={whiteLogo} alt="VaxiTrack" id="logo2" />
+              </Link>
+            </div>
+            <h3 id="signin-description">
+              Designed to help African families track <br />
+              and understand their vaccination <br />
+              journey.
+            </h3>
+          </section>
+          <img
+            src={signInImage}
+            alt="A female African doctor attending to a female nurse"
+            id="signIn-image"
+          />
+        </div>
+
+        <div className="signIn-right" role="form">
+          <div id="right-Layout">
+            <div id="signIn-header">
+              <div id="SignA">
+                <h2 id="sign-account">Sign In to Your Account</h2>
+              </div>
+              <p>Access your vaccination records and reminders</p>
+            </div>
+
+            <form className="signin-form" autoComplete="on" ref={formRef}>
+              <label htmlFor="email" className="emailB">
+                <span>Email address</span>
+              </label>
+              <div className="input-wrapped">
+                <img src={messageIcon} alt="Email icon" className="input-icon" />
+                <input
+                  required
+                  type="email"
+                  id="email"
+                  className="emailB"
+                  name="email"
+                  placeholder="Enter your email"
+                  minLength={14}
+                  maxLength={60}
+                  autoComplete="email"
+                />
+              </div>
+
+              <label htmlFor="password" className="PassW">
+                <span>Password</span>
+              </label>
+              <div className="password-wrapper">
+                <input
+                  required
+                  type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  className="PassW"
+                  name="password"
+                  placeholder="Enter your password"
+                  minLength={8}
+                  maxLength={100}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
+                />
+                <button
+                  type="button"
+                  className="password-toggle"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  onClick={() => setShowPassword((s) => !s)}
+                >
+                  <img
+                    src={showPassword ? eyeOpenedIcon : eyeClosedIcon}
+                    alt={showPassword ? 'Hide password' : 'Show password'}
+                    className="password-toggle-icon"
+                  />
+                </button>
+              </div>
+
+              <p id="password-write">Password should contain at least 8 characters</p>
+              <Link to="/forgot-password" id="forgot-password">Forgot password?</Link>
+
+              <div className="button-container">
+                <button
+                  type="button"
+                  className={`signin-btn ${signInClicked ? 'clicked' : ''}`}
+                  onClick={handleSignIn}
+                >
+                  <span>Sign in</span>
+                </button>
+
+                <p id="or">OR</p>
+
+                <button
+                  type="button"
+                  className="google-btn"
+                  onClick={handleGoogleSignIn}
+                  disabled={googleLoading}
+                >
+                  <img src={googleIcon} className="google-icon" alt="Google logo" />
+                  <span>{googleLoading ? 'Connecting...' : 'Continue with Google'}</span>
+                </button>
+
+                <p id="account">
+                  Don't have an account? <Link to="/signup">Create one</Link>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

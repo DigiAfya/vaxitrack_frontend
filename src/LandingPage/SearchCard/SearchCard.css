@@ -1,0 +1,27 @@
+.search-card {
+  background-color: #ebefff;
+  width: 100%;
+  max-width: 27.5rem;
+  min-height: 15.5rem;
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.search-icon {
+  margin: 0;
+  padding: 0;
+}
+
+.search-card h3 {
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  margin: 0.75rem 0 0;
+  padding: 0;
+}
+
+.search-card p {
+  font-family: 'Montserrat-Medium', sans-serif;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  line-height: 1.5;
+}

@@ -1,0 +1,116 @@
+.footer-wrapper {
+  background-color: #002ccc;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  color: #fff;
+  padding: 5rem 2.5rem 3rem;
+  margin-top: 40px;
+  box-sizing: border-box;
+}
+
+.help {
+  margin-left: 0;
+}
+
+.help h4 {
+  font-family: 'Montserrat-SemiBold', sans-serif;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.help p {
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-size: 18px;
+}
+
+.footer-btn {
+  background-color: transparent;
+  border: 1px solid #fff;
+  width: 211px;
+  height: 60px;
+  font-size: 20px;
+  color: #fff;
+  border-radius: 15px;
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+
+#help-desk{
+  color: #9ece97;
+  text-decoration: none;
+}
+.list-foot {
+  margin: 0;
+  padding: 0;
+}
+
+.list-foot li {
+  color: #9ece97;
+  list-style: none;
+}
+
+.list-foot .footer-spacer {
+  height: 1rem;
+}
+
+.list-foot a,
+.list-foot .footer-link {
+  display: inline-block;
+  /* ensures hover & pointer works */
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 2;
+  cursor: pointer;
+}
+
+.footer-logo {
+  padding-right: 0;
+  margin-top: 0;
+  max-width: 26rem;
+}
+
+.footer-logo img {
+  margin-left: 0;
+}
+
+.footer-logo p {
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-size: 18px;
+  margin-top: 0.75rem;
+  line-height: 1.6;
+}
+
+.span {
+  display: block;
+  padding-top: 1.5rem;
+  color: #8f8f8f;
+}
+
+@media (max-width: 64rem) {
+  .footer-wrapper {
+    padding: 3rem 1.5rem 2rem;
+  }
+}
+
+@media (max-width: 48rem) {
+  .footer-wrapper {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .help,
+  .footer-list,
+  .footer-logo {
+    width: 100%;
+  }
+
+  .footer-btn {
+    width: 100%;
+    max-width: 18rem;
+  }
+}

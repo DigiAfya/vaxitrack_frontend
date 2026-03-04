@@ -1,0 +1,574 @@
+@media (min-width: 5rem) and (min-height: 50rem) {}
+
+@media (max-width: 90rem) and (max-height: 64rem) {}
+
+@font-face {
+    font-family: 'Montserrat Subrayada';
+    src: url("../assets/fonts/MontserratSubrayada-Regular.ttf") format("truetype");
+    font-weight: 700
+}
+
+@font-face {
+    font-family: 'Montserrat Light';
+    src: url("../assets/fonts/Montserrat-Regular.ttf") format("truetype");
+    font-weight: 400
+}
+
+@font-face {
+    font-family: 'Montserrat-Medium';
+    src: url("../assets/fonts/Montserrat-Medium.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url("../assets/fonts/Montserrat-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'Montserrat-SemiBold';
+    src: url("../assets/fonts/Montserrat-SemiBold.ttf") format("truetype");
+    font-weight: 600
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    padding-top: 16px;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-bottom: 2.5rem;
+    gap: 1.25rem;
+    background-color: #ffffff;
+    align-items: center;
+
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 81.875rem;
+    height: auto;
+    max-height: 43.75rem;
+    gap: 1.25rem;
+    align-items: stretch;
+}
+
+.signIn-left {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    max-width: 40.625rem;
+    max-height: none;
+    height: auto;
+    padding-left: 5rem;
+    padding-bottom: 5rem;
+    padding-top: 1.875rem;
+    padding-right: 5rem;
+    background-color: #002CCC;
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    gap: 4.375rem;
+    align-self: stretch;
+}
+
+#TopLeft {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    max-width: 31.875rem;
+    height: auto;
+    max-height: 240px;
+    gap: 3.125rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 1rem;
+}
+
+#VT {
+    display: flex;
+    flex-direction: column;
+    gap: .3125rem;
+    height: 5.125rem;
+    width: 31.875rem;
+    align-items: center;
+    justify-content: center;
+}
+
+#signin-description {
+    height: 6.75rem;
+    font-family: 'Montserrat-SemiBold', sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 2.25rem;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+#signIn-image {
+    width: 100%;
+    max-width: 31.875rem;
+    max-height: 18.375rem;
+    height: auto;
+    border-bottom: .9375rem;
+}
+
+.signIn-right {
+    width: auto;
+    max-width: 40.625rem;
+    min-height: 100%;
+    max-height: none;
+    gap: .25rem;
+    padding-top: .3125rem;
+    padding-right: 2.5rem;
+    padding-bottom: .3125rem;
+    padding-left: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    align-self: stretch;
+
+}
+
+
+#right-Layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-left: 1.25rem;
+    width: 100%;
+    max-width: 35.625rem;
+    height: auto;
+    max-height: 41.875rem;
+    align-items: center;
+    margin-top: 0%;
+}
+
+#signIn-header {
+    width: 100%;
+    height: auto;
+    gap: .3125rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0rem;
+}
+
+#SignA {
+    font-family: 'Montserrat-SemiBold';
+    font-weight: 600;
+    font-size: 1.5625rem;
+    line-height: 3.375rem;
+    letter-spacing: 0%;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #2A2A2A;
+}
+
+#signIn-header,
+#signIn-header>* {
+    margin: 0;
+    padding: 0;
+}
+
+#sign-account,
+#signIn-header p {
+    margin: .3125rem;
+    padding: 0;
+}
+
+#signIn-header p {
+    margin-top: 0;
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #2A2A2A;
+}
+
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    gap: .1875rem;
+    width: 100%;
+    height: auto;
+}
+
+.emailB {
+    max-width: 35.625rem;
+    width: fit-content;
+    height: auto;
+    max-height: 6.25rem;
+}
+
+.signin-form label::after {
+    content: " *";
+    color: red;
+}
+
+.signin-form label {
+    display: block;
+    margin-bottom: .625rem;
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-weight: 500;
+}
+
+.input-wrapped,
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.signIn-right #email,
+.signIn-right #password {
+    width: 570px;
+    height: 60px;
+    padding: 15px;
+    border: none;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-weight: 500;
+    color: #8F8F8F;
+}
+
+.signIn-right #email {
+    padding: 15px 15px 15px 50px;
+    transform: rotate(deg);
+    opacity: 1;
+}
+
+.signIn-right .input-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.signIn-right .password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signIn-right .password-toggle-icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.signIn-right #email:focus,
+.signIn-right #password:focus {
+    outline: none;
+    border: 2px solid #002CCC;
+}
+
+#or {
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: #8F8F8F;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#or::before,
+#or::after {
+    content: "";
+    width: 200px;
+    height: 0px;
+    border: 1px solid #8F8F8F;
+    transform: rotate(-0deg);
+}
+
+#password-write {
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0%;
+    color: #8F8F8F;
+    width: 278px;
+    height: 18px;
+    gap: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.signIn-right #email,
+.signIn-right #password,
+.signIn-right .signin-btn,
+.signIn-right .google-btn {
+    width: 570px;
+}
+
+.signIn-right .signin-btn {
+    transition: background-color 7s ease, color 7s ease;
+}
+
+.signin-btn.clicked {
+    background-color: #A3A3A3;
+    transition: none;
+}
+
+.signin-btn.clicked span {
+    color: #E0E0E0;
+    transition: none;
+}
+
+#forgot-password {
+    width: 570px;
+    height: 20px;
+    gap: 25px;
+    font-family: 'Montserrat-Regular', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-decoration: none;
+    color: #002CCC;
+}
+
+#account {
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    text-align: center;
+    color: #2A2A2A;
+    margin-top: 1rem;
+}
+
+#account a {
+    color: #002CCC;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+#account a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .signIn-left {
+        display: none;
+    }
+
+    .content {
+        justify-content: center;
+    }
+
+    .signIn-right {
+        max-width: 100%;
+    }
+
+    #right-Layout {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    #SignA {
+        font-size: 1.375rem;
+        line-height: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .signIn-right {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    #right-Layout {
+        padding-left: 0.5rem;
+        gap: 1rem;
+    }
+
+    #SignA {
+        font-size: 1.25rem;
+        line-height: 2.5rem;
+    }
+
+    .input-wrapped,
+    .password-wrapper {
+        width: 100%;
+    }
+
+    .signIn-right #email,
+    .signIn-right #password,
+    .signIn-right .signin-btn,
+    .signIn-right .google-btn {
+        width: 100%;
+    }
+
+    #forgot-password {
+        width: 100%;
+    }
+
+    #password-write {
+        width: 100%;
+    }
+
+    #forgot-password {
+        font-size: 0.75rem;
+        line-height: 1rem;
+    }
+
+    #account {
+        font-size: 0.9rem;
+        line-height: 1.35rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.75rem;
+    }
+
+    .signIn-right {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    #right-Layout {
+        padding-left: 0;
+        gap: 0.875rem;
+    }
+
+    #signIn-header {
+        gap: 0.5rem;
+    }
+
+    #SignA {
+        font-size: 1.125rem;
+        line-height: 2rem;
+    }
+
+    #sign-account {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+
+    #signIn-header p {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+
+    .signin-form {
+        gap: 0.125rem;
+    }
+
+    .signin-form label {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .signIn-right #email,
+    .signIn-right #password {
+        height: 50px;
+        padding: 12px;
+        font-size: 0.875rem;
+    }
+
+    .signIn-right #email {
+        padding-left: 40px;
+    }
+
+    .signIn-right .input-icon {
+        width: 16px;
+        height: 16px;
+        left: 15px;
+    }
+
+    .signIn-right .password-toggle-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .button-container {
+        gap: 1.5rem;
+    }
+
+    .signIn-right .signin-btn,
+    .signIn-right .google-btn {
+        height: 48px;
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .google-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    #or {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #or::before,
+    #or::after {
+        width: 100px;
+    }
+
+    #forgot-password {
+        font-size: 0.7rem;
+        line-height: 0.95rem;
+    }
+
+    #password-write {
+        font-size: 0.7rem;
+        line-height: 0.95rem;
+    }
+
+    #account {
+        font-size: 0.85rem;
+        line-height: 1.25rem;
+    }
+
+    #account a {
+        display: block;
+        margin-top: 0.25rem;
+    }
+}

@@ -1,0 +1,100 @@
+.navBar {
+  background-color: #ebefff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 40px;
+}
+
+.navBar .logo {
+  display: flex;
+  gap: 10px;
+}
+
+.navBar .logo img {
+  height: 20px;
+  width: auto;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 60px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navBar a {
+  text-decoration: none;
+  color: #163ED1;
+}
+
+.navBar .btn {
+  display: flex;
+  gap: 15px;
+}
+
+.navBar .signin-btn {
+  background-color: transparent;
+  border: 2px solid blue;
+  color: blue;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 15px;
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+.navBar .create-btn {
+  background-color: #002CCC;
+  color: #fff;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 15px;
+  border: none;
+  padding: 0 20px;
+  cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+
+  .navBar {
+    display: flex;
+    background-color: #ebefff;
+    height: auto;
+    padding: 20px;
+    gap: 15px;
+    max-width: 700px;
+  }
+
+  .navList {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .navBar .btn {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navBar .signin-btn,
+  .navBar .create-btn {
+    width: 100%;
+  }
+}
