@@ -1,5 +1,5 @@
 import "./Heading.css";
-import { Button } from "../Button/Button";
+import { Button } from "../Button/Button.jsx";
 import vaccineImage from "../../public/pictures/image/Vaccine.svg";
 import { useNavigate } from "react-router-dom";
 

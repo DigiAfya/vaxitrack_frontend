@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
 import { useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { loginUser } from '../Api/auth';
 import '../General/App.css';
 import '../General/index.css';
 import './SignIn.css';
@@ -11,11 +12,15 @@ import messageIcon from '../public/pictures/Message.svg';
 import eyeOpenedIcon from '../public/pictures/eyeOpened.svg';
 import eyeClosedIcon from '../public/pictures/eyeClosed.svg';
 import googleIcon from '../public/pictures/google.svg';
+import InvalidP from '../public/pictures/InvalidP.svg';
 
 export function SignIn() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signInClicked, setSignInClicked] = useState(false);
+  const [invalidCredentials, setInvalidCredentials] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const formRef = useRef(null);
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID?.trim() ?? '';
@@ -60,10 +65,38 @@ export function SignIn() {
     startGoogleLogin();
   }
 
-  function handleSignIn() {
+  async function handleSignIn() {
     setSignInClicked(true);
+
     if (!formRef.current?.reportValidity()) {
       setTimeout(() => setSignInClicked(false), 7000);
+      return;
+    }
+
+    try {
+      const response = await loginUser({
+        email: email.trim(),
+        password,
+      });
+
+      const responseData = response?.data?.data ?? response?.data ?? {};
+      const accessToken = responseData?.accessToken;
+      const refreshToken = responseData?.refreshToken;
+
+      if (typeof accessToken === 'string' && accessToken.length > 0) {
+        localStorage.setItem('accessToken', accessToken);
+      }
+
+      if (typeof refreshToken === 'string' && refreshToken.length > 0) {
+        localStorage.setItem('refreshToken', refreshToken);
+      }
+
+      setInvalidCredentials(false);
+      navigate('/dashboard');
+    } catch (error) {
+      console.log(error);
+      setInvalidCredentials(true);
+      setSignInClicked(false);
     }
   }
 
@@ -97,6 +130,9 @@ export function SignIn() {
                 <h2 id="sign-account">Sign In to Your Account</h2>
               </div>
               <p>Access your vaccination records and reminders</p>
+              {invalidCredentials && (
+                <img src={InvalidP} alt="Invalid email or password" className="invalid-password-image" />
+              )}
             </div>
 
             <form className="signin-form" autoComplete="on" ref={formRef}>
@@ -114,6 +150,11 @@ export function SignIn() {
                   placeholder="Enter your email"
                   minLength={14}
                   maxLength={60}
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setInvalidCredentials(false);
+                  }}
                   autoComplete="email"
                 />
               </div>
@@ -126,13 +167,16 @@ export function SignIn() {
                   required
                   type={showPassword ? 'text' : 'password'}
                   id="password"
-                  className="PassW"
+                  className={`PassW ${invalidCredentials ? 'invalid-password' : ''}`}
                   name="password"
                   placeholder="Enter your password"
                   minLength={8}
                   maxLength={100}
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setInvalidCredentials(false);
+                  }}
                   autoComplete="current-password"
                 />
                 <button
@@ -149,7 +193,7 @@ export function SignIn() {
                 </button>
               </div>
 
-              <p id="password-write">Password should contain at least 8 characters</p>
+
               <Link to="/forgot-password" id="forgot-password">Forgot password?</Link>
 
               <div className="button-container">

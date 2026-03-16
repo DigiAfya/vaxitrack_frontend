@@ -17,6 +17,25 @@
   width: auto;
 }
 
+.menuToggle {
+  display: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.menuToggle img {
+  width: 24px;
+  height: 24px;
+}
+
+.navMenu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
 .navList {
   list-style: none;
   display: flex;
@@ -28,16 +47,19 @@
   text-align: center;
   margin: 0;
   padding: 0;
+  font-family: 'Montserrat-Medium';
 }
 
 .navBar a {
   text-decoration: none;
   color: #163ED1;
+  font-family: 'Montserrat-Medium';
 }
 
 .navBar .btn {
   display: flex;
   gap: 15px;
+  font-family: 'Montserrat-Medium';
 }
 
 .navBar .signin-btn {
@@ -53,6 +75,7 @@
   border-radius: 15px;
   padding: 0 20px;
   cursor: pointer;
+  font-family: 'montserrat-regular';
 }
 
 .navBar .create-btn {
@@ -68,29 +91,53 @@
   border: none;
   padding: 0 20px;
   cursor: pointer;
+  font-family: 'Montserrat-Medium';
 }
 
 
 @media (max-width: 768px) {
 
   .navBar {
-    display: flex;
+    position: relative;
     background-color: #ebefff;
-    height: auto;
+    height: 80px;
     padding: 20px;
-    gap: 15px;
-    max-width: 700px;
+  }
+
+  .menuToggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  .navMenu {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background-color: #ebefff;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px 20px 20px;
+    gap: 16px;
+    border-top: 1px solid #d5ddff;
+    z-index: 10;
+  }
+
+  .navMenu.open {
+    display: flex;
   }
 
   .navList {
     flex-direction: column;
-    gap: 15px;
+    gap: 14px;
     align-items: center;
   }
 
   .navBar .btn {
     flex-direction: column;
     width: 100%;
+    gap: 10px;
   }
 
   .navBar .signin-btn,

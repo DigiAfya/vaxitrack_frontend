@@ -1,0 +1,120 @@
+.vaccine-modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.35);
+    z-index: 1100;
+}
+
+.vaccine-modal-shell {
+    width: 100%;
+    max-width: 42rem;
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.98);
+    border-radius: 1.25rem;
+    position: relative;
+    box-sizing: border-box;
+    padding: 3rem 2.5rem 2rem;
+}
+
+.vaccine-modal-close {
+    position: absolute;
+    top: .8137rem;
+    right: .8137rem;
+    border: none;
+    background: transparent;
+    color:#525252;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.vaccine-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.vaccine-info-icon {
+    width: 2.5rem;
+    height: 3rem;
+    margin-bottom: 0.25rem;
+}
+
+.vaccine-info-container h2 {
+    margin: 0;
+    font-family: 'Montserrat-SemiBold', sans-serif;
+    font-weight: 600;
+    font-size: 2.25rem;
+    line-height: 3.375rem;
+    color: #2A2A2A;
+    letter-spacing: 0%;
+}
+
+.vaccine-info-container h5 {
+    margin: 0;
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    color: #3D3D3D;
+}
+
+.vaccine-info-container p {
+    margin: 0;
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.6rem;
+    color:  #8F8F8F; 
+    letter-spacing: 0%;
+}
+
+.disclaimer {
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    border: none;
+    padding: 10px 1.25rem;
+    background-color:#FFE5D1;
+    width: 100%;
+    border-radius: .625rem;
+}
+
+.disclaimer-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+.disclaimer p {
+    margin: 0;
+    font-family: 'Montserrat-Regular', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 1.125rem;
+    letter-spacing: 0%;
+    color: #3D3D3D;
+}
+
+@media (max-width: 640px) {
+    .vaccine-modal-shell {
+        padding: 2.5rem 1.25rem 1.5rem;
+    }
+
+    .vaccine-info-container h2 {
+        font-size: 1.5rem;
+        line-height: 2.1rem;
+    }
+
+    .vaccine-info-container p {
+        font-size: 0.95rem;
+        line-height: 1.45rem;
+    }
+}

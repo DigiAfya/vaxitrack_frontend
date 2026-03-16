@@ -26,7 +26,7 @@ export function CreateProfile() {
       gender,
       category,
     };
-
++
     console.log("Profile Created:", profileData);
 
     navigate("/dashboard");

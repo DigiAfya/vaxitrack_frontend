@@ -12,7 +12,7 @@
 .section-why p {
     font-family: 'Montserrat-Medium', sans-serif;
     font-size: 1.25rem;
-    text-align: center;
+    text-align: center ;
     margin: 1rem auto 0;
     max-width: 62rem;
 }
@@ -35,6 +35,8 @@
     font-size: 1.125rem;
     width: 100%;
     max-width: 18.75rem;
+    text-align: left;
+    margin-left: 0;
 }
 
 @media (max-width: 48rem) {

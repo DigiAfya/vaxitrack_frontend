@@ -9,10 +9,12 @@
 
 .trust-card img {
     width: 60px;
+    margin-left: 30px
 }
 
 .trust-card p {
     font-family: 'Montserrat-Medium', sans-serif;
     color: #2A2A2A;
     font-size: 20px;
+    margin-left: 40px;
 }

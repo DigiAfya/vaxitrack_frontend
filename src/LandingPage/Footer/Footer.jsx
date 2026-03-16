@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { Button } from "../Button/Button";
+import { Button } from "../Button/Button.jsx";
 import "./footer.css";
 import whiteIcon from "../../public/pictures/image/whiteicon.svg";
 

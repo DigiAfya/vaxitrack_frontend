@@ -11,6 +11,8 @@ import { SwitchProfile } from '../Dashboard/switchProfile/switchProfile';
 import { DeleteProfile } from '../Dashboard/deleteProfile/deleteProfile';
 import { LandingPage } from '../LandingPage/LandingPage';
 import { Vaccines } from '../Vaccines/Vaccines';
+import { ExistingProfile } from '../Vaccines/ExistingUser';
+import { Reminder } from '../Reminder/Reminder';
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
         <Route path="/switch-profile" element={<SwitchProfile />} />
         <Route path="/delete-profile" element={<DeleteProfile />} />
         <Route path="/vaccines" element={<Vaccines />} />
+        <Route path="/existing-profile" element={<ExistingProfile />} />
+        <Route path="/reminder" element={<Reminder />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

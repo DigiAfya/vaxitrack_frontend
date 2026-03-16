@@ -229,6 +229,14 @@
     align-items: center;
 }
 
+.signin-form .input-wrapped {
+    margin-bottom: 1.25rem;
+}
+
+.signin-form .password-wrapper {
+    margin-bottom: 1.875rem;
+}
+
 .signIn-right #email,
 .signIn-right #password {
     width: 570px;
@@ -286,6 +294,19 @@
     border: 2px solid #002CCC;
 }
 
+.signIn-right #password.invalid-password,
+.signIn-right #password.invalid-password:focus {
+    border: 2px solid #FF3B30;
+}
+
+.invalid-password-image {
+    width: 570px;
+    max-width: 100%;
+    height: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.875rem;
+}
+
 #or {
     font-family: 'Montserrat-Medium', sans-serif;
     font-weight: 500;
@@ -308,20 +329,6 @@
     height: 0px;
     border: 1px solid #8F8F8F;
     transform: rotate(-0deg);
-}
-
-#password-write {
-    font-family: 'Montserrat-Medium', sans-serif;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 18px;
-    letter-spacing: 0%;
-    color: #8F8F8F;
-    width: 278px;
-    height: 18px;
-    gap: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
 }
 
 .signIn-right #email,
@@ -437,16 +444,13 @@
 
     .signIn-right #email,
     .signIn-right #password,
+    .invalid-password-image,
     .signIn-right .signin-btn,
     .signIn-right .google-btn {
         width: 100%;
     }
 
     #forgot-password {
-        width: 100%;
-    }
-
-    #password-write {
         width: 100%;
     }
 
@@ -553,11 +557,6 @@
     }
 
     #forgot-password {
-        font-size: 0.7rem;
-        line-height: 0.95rem;
-    }
-
-    #password-write {
         font-size: 0.7rem;
         line-height: 0.95rem;
     }
