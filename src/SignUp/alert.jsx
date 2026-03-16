@@ -1,15 +1,13 @@
 import './SignUp.css';
 import '../General/App.css';
-import { useNavigate } from 'react-router-dom';
 import successIcon from '../public/pictures/Tick.svg';
 
-export function AccountCreated({ onClose }) {
-  const navigate = useNavigate();
+export function AccountCreated({ onClose, onContinue }) {
 
-  function handleContinueToSignIn() {
-    onClose();
-    navigate('/signin');
-  }
+    function handleContinueToSignIn() { 
+  onClose();
+  onContinue(); 
+}
 
   return (
     <div className="custom-modal" id="customModal">

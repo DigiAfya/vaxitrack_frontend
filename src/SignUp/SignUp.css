@@ -493,6 +493,29 @@ body {
   font-weight: 500;
 }
 
+.signup-form .button-container {
+  width: 36.875rem;
+  max-width: 100%;
+}
+
+.signup-form .signin-btn,
+.signup-form .google-btn {
+  width: 36.875rem;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1201px) {
+
+  .signup-form .button-container,
+  .signup-form .signin-btn,
+  .signup-form .google-btn {
+    width: 40.625rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
 .signin-btn {
   width: 100%;
   height: 3.75rem;

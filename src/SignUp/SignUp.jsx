@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { registerUser } from '../Api/auth';
 import './SignUp.css';
 import '../General/App.css';
 import { AccountCreated } from './alert'
@@ -30,12 +31,13 @@ export function SignUp() {
   const hasLowercase = /[a-z]/.test(password);
   const hasUppercase = /[A-Z]/.test(password);
   const hasNumber = /[0-9]/.test(password);
+  const hasSpecialCharacter = /[!@#$%^&*]/.test(password);
   const hasMinLength = password.length >= 8;
-  const isStrongPassword = hasLowercase && hasUppercase && hasNumber && hasMinLength;
+  const isStrongPassword = hasLowercase && hasUppercase && hasNumber && hasSpecialCharacter && hasMinLength;
 
   function validatePasswords() {
     if (!isStrongPassword) {
-      setError("Password must include uppercase, lowercase, number, and at least 8 characters");
+      setError("Password must include uppercase, lowercase, number, special character, and at least 8 characters");
       return false;
     }
 
@@ -48,17 +50,59 @@ export function SignUp() {
     return true;
   }
 
-  function handleCreateAccount() {
+  async function handleCreateAccount() { /* REPLACED */
+
     setCreateAccountClicked(true);
+
     if (!formRef.current?.reportValidity()) {
       setTimeout(() => setCreateAccountClicked(false), 7000);
       return;
     }
-    if (validatePasswords()) {
-      setAccountCreated(true);
-    } else {
+
+    if (!validatePasswords()) {
       setTimeout(() => setCreateAccountClicked(false), 7000);
-      setAccountCreated(false);
+      return;
+    }
+
+    try {
+      const formData = new FormData(formRef.current);
+
+      const emailValue = String(formData.get('email') ?? '').trim();
+
+      const response = await registerUser({
+        email: emailValue,
+        password: password,
+        role: 'user',
+      });
+
+      const responseData = response?.data?.data ?? response?.data ?? {};
+      const accessToken = responseData?.accessToken;
+      const refreshToken = responseData?.refreshToken;
+
+      if (typeof accessToken === 'string' && accessToken.length > 0) {
+        localStorage.setItem('accessToken', accessToken);
+      }
+
+      if (typeof refreshToken === 'string' && refreshToken.length > 0) {
+        localStorage.setItem('refreshToken', refreshToken);
+      }
+
+      setError('');
+      setCreateAccountClicked(false);
+      setAccountCreated(true);
+
+    } catch (error) {
+      const errorMessage =
+        error?.response?.data?.message ||
+        error?.response?.data?.error ||
+        error?.message ||
+        'Registration failed. Please try again.';
+
+      setError(
+        errorMessage
+      );
+
+      setCreateAccountClicked(false);
     }
   }
 
@@ -100,7 +144,6 @@ export function SignUp() {
     setGoogleLoading(true);
     startGoogleLogin();
   }
-
 
   return (
     <>
@@ -155,8 +198,8 @@ export function SignUp() {
                 onFocus={() => setShowPasswordMessage(true)}
                 onBlur={() => setShowPasswordMessage(false)}
                 autoComplete="new-password"
-                pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$"
-                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$"
+                title="Must contain at least one number, one uppercase letter, one lowercase letter, one special character and at least 8 or more characters"
               />
               <button
                 type="button"
@@ -178,6 +221,7 @@ export function SignUp() {
                 <p id="letter" className={hasLowercase ? "valid" : "invalid"}>A <b>lowercase</b> letter</p>
                 <p id="capital" className={hasUppercase ? "valid" : "invalid"}>A <b>capital (uppercase)</b> letter</p>
                 <p id="number" className={hasNumber ? "valid" : "invalid"}>A <b>number</b></p>
+                <p id="special-character" className={hasSpecialCharacter ? "valid" : "invalid"}>A <b>special character</b> (!@#$%^&*)</p>
                 <p id="length" className={hasMinLength ? "valid" : "invalid"}>Minimum <b>8 characters</b></p>
               </div>
             )}
@@ -237,7 +281,7 @@ export function SignUp() {
               <p id="account">Already have an account? <Link to="/signin">Sign in</Link></p>
             </div>
           </form >
-          {accountCreated && <AccountCreated onClose={() => setAccountCreated(false)} />}
+          {accountCreated && <AccountCreated onClose={() => setAccountCreated(false)} onContinue={() => navigate("/signin")} />}
         </div>
       </div>
     </>
