@@ -71,6 +71,30 @@
     }
 }
 
+@media (max-width: 600px) {
+    .existing-user-intro .vaccines-intro-text p {
+        white-space: normal;
+        max-width: 22rem;
+    }
+
+    .existing-user-intro .vaccines-intro-text p br {
+        display: none;
+    }
+
+    .search-vaccine {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        justify-self: stretch;
+    }
+
+    .search-input {
+        width: 100%;
+        max-width: none;
+        box-sizing: border-box;
+    }
+}
+
 .existing-user-table-section {
     flex: 1;
     display: flex;
@@ -152,6 +176,7 @@
     border-right: none;
     background-clip: padding-box;
 }
+
 .vaccines-table tbody tr td:first-child {
     border-bottom-left-radius: 10px;
     overflow: hidden;

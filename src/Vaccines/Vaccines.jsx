@@ -20,9 +20,9 @@ export function Navboard() {
                 <img src={VaxitrackLogo} alt="VaxiTrack" id="logoB" />
                 <section className="nav-links">
                     <ul>
-                        <li><NavLink to="/dashboard"><p>Dashboard</p></NavLink></li>
-                        <li><NavLink to="/vaccines" className={({ isActive }) => isActive || location.pathname === '/existing-profile' ? 'active' : undefined}><p>Vaccines</p></NavLink></li>
-                        <li><NavLink to="/reminder"><p>Reminders</p></NavLink></li>
+                        <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                        <li><NavLink to="/vaccines" className={({ isActive }) => isActive || location.pathname === '/existing-profile' ? 'active' : undefined}>Vaccines</NavLink></li>
+                        <li><NavLink to="/reminder">Reminders</NavLink></li>
                         <li className="profile-item">
                             <button type="button" className="profile-trigger" onClick={toggleProfileOptions}>
                                 Profile

@@ -23,27 +23,32 @@ export function Nav() {
         <img src={colorIcon} alt="logo" />
       </div>
 
-      <button
-        type="button"
-        className="menuToggle"
-        onClick={toggleMobileMenu}
-        aria-label="Toggle navigation menu"
-        aria-expanded={isMobileMenuOpen}
-      >
-        <img src={threeLines} alt="menu" />
-      </button>
-
       <div className={`navMenu ${isMobileMenuOpen ? "open" : ""}`}>
         <ul className="navList">
           <li><a href="#how-it-works" onClick={closeMobileMenu}>How it works</a></li>
           <li><a href="#credibility" onClick={closeMobileMenu}>Credibility</a></li>
           <li><a href="#help-support" onClick={closeMobileMenu}>Help and Support</a></li>
         </ul>
+        <div className="mobileDropdownButtons">
+          <Button className="signin-btn" text="Sign In" onClick={() => { closeMobileMenu(); navigate('/signin'); }} />
+          <Button text="Create Account" className="create-btn" onClick={() => { closeMobileMenu(); navigate('/signup'); }} />
+        </div>
+      </div>
 
+      <div className="navRight">
         <div className="btn">
           <Button className="signin-btn" text="Sign In" onClick={() => { closeMobileMenu(); navigate('/signin'); }} />
           <Button text="Create Account" className="create-btn" onClick={() => { closeMobileMenu(); navigate('/signup'); }} />
         </div>
+        <button
+          type="button"
+          className="menuToggle"
+          onClick={toggleMobileMenu}
+          aria-label="Toggle navigation menu"
+          aria-expanded={isMobileMenuOpen}
+        >
+          <img src={threeLines} alt="menu" />
+        </button>
       </div>
     </nav>
   );

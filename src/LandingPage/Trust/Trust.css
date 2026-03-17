@@ -1,6 +1,7 @@
 .trust-wrapper {
-    margin-top: 5rem;
+    margin-top: 3.5rem;
     padding: 0 1.25rem;
+    margin-bottom: 2.5rem;
 }
 
 .trust-wrapper h2 {
@@ -64,5 +65,14 @@
 
     .disclaimer p {
         font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 31.1875rem) {
+    #T1, #T2, #T3, #T4 {
+        font-size: 1.25rem;
+        font-family: 'Montserrat-SemiBold', sans-serif;
+        font-weight: 600;
+        line-height: 1.875rem;
     }
 }

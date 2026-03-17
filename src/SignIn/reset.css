@@ -33,6 +33,7 @@
     flex-direction: column;
     align-items: center;
     animation: slideDown 0.4s ease-out;
+
 }
 
 @keyframes slideDown {
@@ -212,10 +213,15 @@
 
 /* Responsive Design for Tablets and Smaller Screens */
 @media (max-width: 1024px) {
+    .reset-page {
+        padding: 40px 24px;
+    }
+
     .reset-container {
-        max-width: 90%;
-        width: 90%;
+        width: 100%;
+        max-width: 560px;
         padding: 60px 40px;
+        margin-right: 2.1875rem;
     }
 }
 
@@ -228,7 +234,8 @@
         max-width: 100%;
         width: 100%;
         padding: 50px 30px;
-        margin-bottom: 50px;
+        margin: 0 auto 50px;
+        margin-right: 2.1875rem;
     }
 
     .reset-header {
@@ -266,6 +273,20 @@
     }
 }
 
+@media (max-width: 700px) {
+    .reset-page {
+        padding: 28px 16px;
+    }
+
+    .reset-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 48px 24px;
+        margin: 0 auto 45px;
+        margin-right: 2.1875rem;
+    }
+}
+
 @media (max-width: 480px) {
     .reset-page {
         padding: 20px 15px;
@@ -277,6 +298,7 @@
         padding: 40px 20px;
         margin-bottom: 30px;
         gap: 35px;
+        margin-right: 1.75rem;
     }
 
     .close {
