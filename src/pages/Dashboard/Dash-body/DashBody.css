@@ -1,0 +1,688 @@
+.dash-body {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding-top: 0px;
+  padding-bottom: 2.5rem;
+}
+
+#dash2 {
+  margin-top: -17px;
+}
+
+.body-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  background-color: #fff;
+  max-height: 30.8538rem;
+  height: auto;
+  border-radius: 16px;
+  padding: 20px;
+  gap: 18px;
+  box-shadow: 0px 0px 30px rgba(1, 1, 1, 0.08);
+}
+
+.body-text {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 8px;
+}
+
+.body-text h2 {
+  font-size: 36px;
+  margin: 0;
+  margin-top: 0px;
+  line-height: 3.375rem;
+  font-family: 'Montserrat-semiBold', sans-serif;
+}
+
+.body-text p {
+  color: #8f8f8f;
+  font-size: 14px;
+  margin: 0;
+}
+
+.body-btn {
+  margin-top: 20px;
+  background-color: #002ccc;
+  color: #fff;
+  width: 100%;
+  height: 48px;
+  border-radius: 15px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.profile-container {
+  margin-bottom: 12px;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info p {
+  color: #fff;
+}
+
+.profile-summary {
+  background: #002ccc;
+  padding: 12px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-summary h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #fff;
+}
+
+.profile-summary p {
+  margin: 0;
+  font-size: 14px;
+  color: #fff;
+}
+
+.user-main {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.dash-body-avatar {
+  margin-left: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #F0FEEE;
+  color: #002CCC;
+  font-size: 18px;
+  font-weight: 600;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-info-left {
+  display: flex;
+  gap: 15px;
+}
+
+
+.profile-card {
+  margin-top: 8px;
+  background: white;
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+
+}
+
+.profile-card h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.profile-detail {
+  margin-top: 6px;
+  color: #666;
+  font-size: 13px;
+  width: 100%;
+  display: block;
+  line-height: 1.4;
+  min-height: 0;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-vaccine {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  column-gap: 0;
+}
+
+.profile-vaccine div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  font-size: 12px;
+}
+
+
+
+.profile-vaccine img {
+  width: 20px;
+}
+
+.profile-grid {
+  margin-top: 0;
+  width: 90%;
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto;
+}
+
+
+.add-profile-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 30px 25px;
+  justify-content: space-between;
+}
+
+.add-profile-btn img {
+  width: 28px;
+  cursor: pointer;
+  padding: 0;
+}
+
+
+.status-btn {
+  display: flex;
+  gap: 10px;
+  height: 40px;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 10px;
+}
+
+.status {
+  background: #fff;
+  color: #333;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Montserrat-Medium', sans-serif;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.status.active {
+  background-color: #284A23;
+  color: #fff;
+}
+
+.vaccine-section {
+  width: 100%;
+}
+
+.dashboard-group {
+  width: 100%;
+}
+
+.dashboard-list {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard-list-item {
+  width: 100%;
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.dashboard-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dashboard-card-main {
+  width: 100%;
+  min-width: 0;
+}
+
+.dashboard-card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dashboard-vaccine-name {
+  margin: 0;
+  font-family: 'Montserrat-semiBold', sans-serif;
+  font-size: 24px;
+  line-height: 36px;
+  color: #2A2A2A;
+}
+
+.dashboard-badge {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  background-color: #EBEFFF;
+  color: #002CCC;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 20px;
+  font-family: 'Montserrat-Medium', sans-serif;
+}
+
+.dashboard-card-subtitle {
+  margin: 14px 0 0;
+  color: #555555;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.dashboard-card-footer {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-card-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dashboard-card-status img {
+  width: 22px;
+}
+
+.dashboard-card-status p {
+  margin: 0;
+  color: #333333;
+  font-size: 18px;
+  font-family: 'Montserrat-SemiBold', sans-serif;
+}
+
+.dashboard-remove-btn {
+  border: none;
+  background: transparent;
+  color: #284A23;
+  font-size: 24px;
+  line-height: 36px;
+  font-family: 'Montserrat-Medium', sans-serif;
+  cursor: pointer;
+  padding: 0;
+}
+
+.dashboard-card-actions {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.dashboard-action-btn {
+  width: auto;
+  margin-left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid #284A23;
+  background: transparent;
+  color: #284A23;
+  border-radius: 15.98px;
+  padding: 12px 14px;
+  max-width: 289.57px;
+  height: auto;
+  max-height: 60px;
+  font-size: 24px;
+  font-family: 'Montserrat-Medium', sans-serif;
+  cursor: pointer;
+}
+
+.dashboard-action-check {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 50%;
+  border: 2px solid #284A23;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 1;
+  color: #284A23;
+  box-sizing: border-box;
+}
+
+.dashboard-action-check.checked {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.dashboard-action-label {
+  font-size: 24px;
+  white-space: nowrap;
+}
+
+.dashboard-recommendations {
+  margin-top: 26px;
+}
+
+.dashboard-recommendations h4 {
+  margin: 0;
+}
+
+.dashboard-meta {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.dashboard-meta.error {
+  color: #A12929;
+}
+
+
+@media (min-width: 1024px) {
+
+  .body-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 750px;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 0px 20px;
+    padding-bottom: 30px;
+    gap: 20px;
+    height: 440px;
+    box-shadow: 0px 0px 50px rgba(1, 1, 1, 0.08);
+  }
+
+  .body-wrapper img {
+    margin: 0;
+    width: 178px;
+    padding-top: 40px;
+  }
+
+  .body-text h3 {
+    font-size: 36px;
+  }
+
+  .body-text p {
+    font-size: 18px;
+  }
+
+  .body-btn {
+    width: 580px;
+    height: 60px;
+    font-size: 20px;
+    border-radius: 15px;
+  }
+
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .header-img {
+    display: flex;
+    gap: 30px;
+  }
+
+  .header-img img {
+    width: 50px;
+  }
+
+  .profile-container {
+    margin-bottom: 15px;
+  }
+
+  .profile-summary {
+    padding: 12px;
+    border-radius: 18px;
+    width: 100%;
+    height: 89px;
+    color: #fff;
+    margin-top: 15px;
+
+  }
+
+  .user-main {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .dash-body-avatar {
+    margin-left: 15px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #F0FEEE;
+    color: #002CCC;
+    font-size: 30px;
+    font-weight: 600;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-info-left {
+    display: flex;
+    gap: 15px;
+  }
+
+  .user-info {
+    padding-left: 15px;
+  }
+
+  .user-info h4 {
+    font-size: 24px;
+  }
+
+  .user-info p {
+    color: #fff;
+    padding-top: 10px;
+    font-size: 14px;
+  }
+
+  .user-edit img {
+    width: 50px;
+    padding-right: 15px;
+  }
+
+  .profile-card {
+    margin-top: 40px;
+    padding: 15px;
+    border-radius: 10px;
+    padding: 50px 45px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .profile-card h3 {
+    font-size: 36px;
+  }
+
+  .profile-card p {
+    font-size: 24px;
+  }
+
+  .profile-grid {
+    border-radius: 20px;
+  }
+
+  .add-profile-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+    margin: 0;
+    padding: 60px 50px;
+    cursor: pointer;
+  }
+
+  .profile-vaccine {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    column-gap: 0;
+  }
+
+  .vaccine-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+    min-width: 0;
+    gap: 8px;
+  }
+
+  .vaccine-item img {
+    width: 24px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .vaccine-item p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .status-btn {
+    display: flex;
+    gap: 25px;
+    height: 40px;
+    margin-top: 50px;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .status {
+    background: #fff;
+    color: #333;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .status.active {
+    background-color: #284A23;
+    color: #fff;
+  }
+
+  .dashboard-list {
+    margin-top: 26px;
+    gap: 20px;
+  }
+
+  .dashboard-list-item {
+    border-radius: 20px;
+    padding: 30px;
+  }
+
+  .dashboard-card-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .dashboard-vaccine-name {
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  .dashboard-badge {
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 8px 14px;
+  }
+
+  .dashboard-card-subtitle {
+    font-size: 22px;
+    margin-top: 16px;
+  }
+
+  .dashboard-card-footer {
+    margin-top: 26px;
+  }
+
+  .dashboard-card-status p {
+    font-size: 24px;
+  }
+
+  .dashboard-remove-btn {
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  .dashboard-action-btn {
+    border-radius: 15.98px;
+    padding: 12px 14px;
+    max-width: 289.57px;
+    width: auto;
+    height: auto;
+    max-height: 60px;
+    font-size: 24px;
+    gap: 8px;
+  }
+
+  .dashboard-card-actions {
+    gap: 12px;
+  }
+
+  .dashboard-meta {
+    font-size: 16px;
+  }
+
+
+
+}
+
+.no-vaccines-empty {
+  width: 100%;
+  height: 250px;
+  background-color: #fff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-vaccines-empty p {
+  color: #525252;
+  font-size: 20px;
+  margin: 0;
+}

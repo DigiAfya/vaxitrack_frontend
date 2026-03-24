@@ -179,6 +179,8 @@ body {
   margin-top: 0;
 
   font-family: 'Montserrat-Medium', sans-serif;
+  text-align: center;
+  width: 100%;
 }
 
 #signup-form {
@@ -295,9 +297,10 @@ body {
 
 .password-toggle {
   position: absolute;
-  right: .75rem;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 2.8125rem;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -310,6 +313,7 @@ body {
 .password-toggle-icon {
   width: 1.125rem;
   height: 1.125rem;
+  margin-right: -5rem;
 }
 
 #password-help {
@@ -506,7 +510,13 @@ body {
 }
 
 @media (min-width: 1201px) {
-
+  .signup-page{
+    margin-left: .625rem;
+  }
+  footer{
+    margin-left: 3.125rem;
+    overflow-x: hidden;
+  }
   .signup-form .button-container,
   .signup-form .signin-btn,
   .signup-form .google-btn {
@@ -514,6 +524,8 @@ body {
     max-width: 100%;
     box-sizing: border-box;
   }
+
+  
 }
 
 .signin-btn {
@@ -788,7 +800,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: auto;
   max-height: 28.9375rem;
   padding-top: 1.25rem;
   padding-right: 80px;
@@ -797,14 +809,15 @@ body {
   background-color: #002CCC;
   color: #FFFFFF;
   position: static;
+  align-items: flex-start;
 }
 
 footer {
   display: flex;
   flex-direction: row;
   width: 100%;
-  max-width: 85rem;
   flex-wrap: inherit;
+  height: auto;
 }
 
 .help {
@@ -814,7 +827,7 @@ footer {
   padding-bottom: 2.5rem;
   width: 100%;
   max-width: 25rem;
-  height: 100vh;
+  height: auto;
   max-height: 21.4375rem;
   margin-right: 5rem;
 }
@@ -855,7 +868,7 @@ footer {
   align-items: center;
   width: 100%;
   max-width: 13.1875rem;
-  height: 100vh;
+  height: auto;
   max-height: 3.75rem;
   background-color: #002CCC;
   color: #FFFFFF;
@@ -874,6 +887,7 @@ footer {
   padding-bottom: .625rem;
   padding-left: 1.25rem;
   gap: 1.25rem;
+  height: 3.5rem;
 }
 
 .Information {
@@ -882,7 +896,7 @@ footer {
   width: 100%;
   max-width: 25rem;
   max-height: 16.5625rem;
-  height: 100vh;
+  height: auto;
   padding-bottom: 5rem;
   gap: 2.5rem;
   margin-right: 6rem;
@@ -890,7 +904,7 @@ footer {
 
 #Information1 {
   max-height: 89px;
-  height: 100vh;
+  height: auto;
   gap: .625rem;
   font-family: 'Montserrat-SemiBold', sans-serif;
   font-weight: 600;
@@ -903,7 +917,7 @@ footer {
 
 #Information2 {
   max-height: 89px;
-  height: 100vh;
+  height: auto;
   gap: .625rem;
   font-family: 'Montserrat-SemiBold', sans-serif;
   font-weight: 600;
@@ -934,7 +948,7 @@ footer {
   vertical-align: middle;
   max-width: 25rem;
   width: 100%;
-  height: 100vh;
+  height: auto;
   max-height: 5.625rem
 }
 
@@ -947,10 +961,12 @@ footer {
   vertical-align: middle;
   max-width: 25rem;
   width: 100%;
-  height: 100vh;
+  height: auto;
   max-height: 5.625rem;
   color: #8F8F8F;
+  align-items: flex-start;
 }
+
 
 @media (max-width: 900px) {
   .signin-btn {
@@ -961,6 +977,7 @@ footer {
 @media (max-width: 1200px) {
   .signup-page {
     padding: 1.5rem;
+    overflow-y: hidden;
   }
 
   .signup-right {
@@ -984,6 +1001,28 @@ footer {
     width: 100%;
     max-width: 100%;
   }
+
+  #password {
+  width: 600px;
+  height: 3.125rem;
+  padding: .9375rem;
+  padding-right: 2.8125rem;
+  gap: 2.75rem;
+  transform: rotate(0deg);
+  opacity: 1;
+  border: none;
+  background-color: #F5F5F5;
+  border-radius: .9375rem;
+  display: flex;
+  color: #8F8F8F;
+}
+ .password-toggle-icon{
+   margin-right: -80px;
+ }
+
+ footer{
+  margin-left: 1.5625rem;
+ }
 }
 
 
@@ -1001,6 +1040,8 @@ svg {
     flex-direction: column;
     padding: 1rem;
     gap: 1rem;
+    overflow-x: hidden;
+    margin-right: 1.5625rem;
   }
 
   .signup-right {
@@ -1102,10 +1143,19 @@ svg {
     margin-top: 0;
     margin-bottom: 0;
   }
+
+  .password-toggle-icon{
+     margin-right: 0px;
+   } 
 }
+
 
 /* Very small phones tweaks */
 @media (max-width: 420px) {
+  .signup-page{
+    overflow-x: hidden;
+    margin-left: .625rem;
+  }
   #create-account {
     font-size: 1.25rem;
     line-height: 1.75rem;
@@ -1160,4 +1210,7 @@ svg {
     gap: 12px;
     padding-right: 1rem;
   }
+  .password-toggle-icon{
+     margin-right: 0px;
+   } 
 }

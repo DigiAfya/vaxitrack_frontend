@@ -1,0 +1,142 @@
+.delogout-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.delogout-modal {
+    width: 100%;
+    max-width: 680px;
+    border-radius: 24px;
+    background: #F2F2F2;
+    padding: 26px 28px;
+    box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.delogout-modal-drop {
+    animation: delogoutDropIn 240ms ease-out;
+    transform-origin: top center;
+}
+
+@keyframes delogoutDropIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-18px) scale(0.98);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.delogout-icon-wrap {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: #F2DDE0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: none;
+}
+
+.delogout-icon {
+    width: 34px;
+    height: 34px;
+}
+
+.delogout-icon-fill {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.delogout-title {
+    margin: 0;
+    font-family: 'Montserrat-SemiBold', sans-serif;
+    font-size: 2.25rem;
+    line-height: 3.375rem;
+    color: #2A2A2A;
+}
+
+.delogout-text {
+    margin: 10px 0 18px;
+    max-width: 560px;
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-size: 16px;
+    line-height: 1.5rem;
+    color: #8F8F8F;
+}
+
+.delogout-btn {
+    width: 100%;
+    max-width: 17.6875rem;
+    border-radius: .9375rem;
+    border: 1.6px solid transparent;
+    height: 3.75rem;
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-size: 20px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.delogout-btn:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+}
+
+.delogout-btn-danger {
+    background: #FE2F32;
+    color: #FFFFFF;
+}
+
+.delogout-btn-icon {
+    width: 26px;
+    height: 26px;
+    filter: brightness(0) invert(1);
+}
+
+.delogout-btn-cancel {
+    margin-top: 10px;
+    background: transparent;
+    border-color: #FF3131;
+    color: #FF3131;
+}
+
+@media (max-width: 768px) {
+    .delogout-modal {
+        border-radius: 18px;
+        padding: 24px 18px;
+    }
+
+    .delogout-title {
+        font-size: 36px;
+    }
+
+    .delogout-text {
+        font-size: 19px;
+        margin: 10px 0 20px;
+    }
+
+    .delogout-btn {
+        height: 56px;
+        font-size: 24px;
+        max-width: 340px;
+    }
+}
