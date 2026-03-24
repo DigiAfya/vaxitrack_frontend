@@ -10,7 +10,7 @@ import overdue from "../../../public/pictures/image/overdue.svg";
 import plus from "../../../public/pictures/image/plus.svg";
 import edit from "../../../public/pictures/image/edit.svg";
 import share from "../../../public/pictures/image/share.svg";
-import Btime from "../../../public/pictures/Btime.svg";
+import Btime from "../../../public/pictures/BTime.svg";
 import "./DashBody.css";
 
 /* 🔥 SINGLE SOURCE OF TRUTH */
