@@ -1,0 +1,112 @@
+NOTIFICATION SYSTEM - INTEGRATION GUIDE
+========================================
+
+FILES TO ADD:
+- src/Notifications/NotificationContext.jsx
+- src/Notifications/Toast.jsx
+- src/Notifications/Toast.css
+
+STEP 1: WRAP YOUR APP
+======================
+Open src/General/main.jsx
+
+Add this import at the top:
+  import { NotificationProvider } from '../Notifications/NotificationContext';
+  import { ToastContainer } from '../Notifications/Toast';
+
+Wrap the app like this:
+  <React.StrictMode>
+    <GoogleOAuthProvider clientId={googleClientId}>
+      <BrowserRouter>
+        <NotificationProvider>
+          <App />
+          <ToastContainer />
+        </NotificationProvider>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
+  </React.StrictMode>
+
+
+STEP 2: USE IN ANY COMPONENT
+==============================
+Import the hook:
+  import { useNotification } from '../Notifications/NotificationContext';
+
+Inside the component:
+  const { notify } = useNotification();
+
+Then call it when actions happen:
+
+  // Profile created
+  notify.success('Profile created successfully');
+
+  // Profile deleted
+  notify.success('Profile deleted');
+
+  // Reminder set
+  notify.reminder('Vaccine reminder set for March 30');
+
+  // Error
+  notify.error('Failed to create profile. Please try again.');
+
+  // Warning
+  notify.warning('This vaccine is overdue by 2 weeks');
+
+  // Info
+  notify.info('Switched to John Doe profile');
+
+
+STEP 3: EXAMPLE - CREATE PROFILE PAGE
+=======================================
+In createProfile.jsx, after a successful profile creation:
+
+  import { useNotification } from '../../Notifications/NotificationContext';
+
+  export function CreateProfile() {
+    const { notify } = useNotification();
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        await api.post('/api/v1/profiles', profileData);
+        notify.success('Profile created successfully');
+        navigate('/dashboard');
+      } catch (err) {
+        notify.error('Failed to create profile');
+      }
+    };
+  }
+
+
+STEP 4: EXAMPLE - REMINDER PAGE
+=================================
+When a reminder is due today, show a notification on page load:
+
+  import { useNotification } from '../Notifications/NotificationContext';
+
+  // Inside Rnotifications component, after reminders load:
+  useEffect(() => {
+    if (reminders.length > 0) {
+      const todayReminders = reminders.filter(r => toDateKey(r.dueDate) === todayKey);
+      if (todayReminders.length > 0) {
+        notify.reminder(todayReminders.length + ' vaccine reminder(s) due today');
+      }
+
+      const overdueReminders = reminders.filter(r => r.status === 'overdue');
+      if (overdueReminders.length > 0) {
+        notify.warning(overdueReminders.length + ' vaccine(s) are overdue');
+      }
+    }
+  }, [reminders]);
+
+
+NOTIFICATION TYPES:
+===================
+  notify.success(message)   - Green, for completed actions
+  notify.error(message)     - Red, for failures
+  notify.warning(message)   - Orange, for overdue/warnings
+  notify.info(message)      - Blue, for general info
+  notify.reminder(message)  - Purple, for vaccine reminders (stays 6 seconds)
+
+All notifications auto-dismiss after 4 seconds (6 for reminders).
+Users can also click the X to close them manually.
