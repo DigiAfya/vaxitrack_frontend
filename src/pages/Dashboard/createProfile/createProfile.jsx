@@ -6,10 +6,12 @@ import { Success } from "../success/Success.jsx";
 import "./createProfile.css";
 import { useContext } from "react";
 import { ProfileContext } from "../../context/profileContext.jsx";
+import { useNotification } from "../../../Notifications/NotificationContext";
 
 export function CreateProfile() {
   const navigate = useNavigate();
   const { addProfile, profiles } = useContext(ProfileContext);
+  const { notify } = useNotification();
 
   const [firstName, setFirstName] = useState("");
   const [middleName, setMiddleName] = useState("");
@@ -66,12 +68,13 @@ export function CreateProfile() {
     setIsSubmitting(false);
 
     if (!result?.success) {
-      alert(result?.message || "Unable to create profile. Please check your details or try again.");
+      notify.error(result?.message || "Unable to create profile. Please check your details or try again.");
       return;
     }
 
     localStorage.setItem('activeProfileCategory', category);
     console.log("Profile Created:", profileData);
+    notify.success('Profile created for ' + first + ' ' + last);
 
     setShowSuccess(true);
 
