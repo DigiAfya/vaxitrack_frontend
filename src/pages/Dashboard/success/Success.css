@@ -1,0 +1,128 @@
+/* ---------- MOBILE-FIRST BASE ---------- */
+
+.success-container {
+    margin-top: 20px;
+    width: 100%;
+    max-height: auto;
+    border: none;
+    border-radius: 16px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    line-height: 1.2;
+    margin-bottom: 100px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.success-container img {
+    margin-top: 0px;
+    width: 80px;
+    height: 80px;
+}
+
+.success-container h2 {
+    margin-top: 12px;
+    margin-bottom: 8px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.success-container p {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin: 10px 0 20px 0;
+}
+
+.success-btn {
+    background-color: #002CCC;
+    color: #fff;
+    /* width: 100%; */
+    width: 400px;
+    height: 50px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+/* ---------- DESKTOP OVERRIDE (KEEP ORIGINAL) ---------- */
+
+@media (min-width: 1024px) {
+    .success-container {
+        width: 750px;
+        max-height: 390px;
+        border-radius: 20px;
+        line-height: 1.2;
+        margin-top: 0;
+        margin-bottom: 230px;
+        padding-bottom: 30px;
+        margin-top: 25%;
+    }
+
+    .success-container img {
+        margin-top: 0;
+        width: auto;
+        height: auto;
+    }
+
+    .success-container h2 {
+        margin-top: 12px;
+        margin-bottom: 8px;
+        font-size: initial;
+    }
+
+    .success-container p {
+        font-size: initial;
+    }
+
+    .success-btn {
+        width: 590px;
+        height: 60px;
+        border-radius: 15px;
+        font-size: initial;
+    }
+}
+
+
+
+
+
+/* .success-container {
+    margin-top: 00px;
+    width: 750px;
+    max-height: 390px;
+    border: none;
+    border-radius: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background-color: #fff;
+    line-height: 0.5;
+    margin-bottom:230px;
+    padding-bottom: 30px;
+}
+
+.success-container img {
+    margin-top: -20px;
+}
+
+.success-container h2 {
+    margin-top: -50px;
+}
+
+.success-btn {
+    background-color: #002CCC;
+    color: #fff;
+    width: 590px;
+    height: 60px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+} */

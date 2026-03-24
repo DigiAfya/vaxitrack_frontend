@@ -175,6 +175,12 @@ body {
     line-height: 1.875rem;
     color: #E0E0E0;
     letter-spacing: 0%;
+    margin-top: 20px;
+}
+
+.switch-button.switch-button-active {
+    background-color: #002CCC;
+    color: #FFFFFF;
 }
 
 .vaccine-container {
@@ -188,9 +194,10 @@ body {
     width: 100%;
     max-width: 46.875rem;
     margin: auto;
-    margin-top: 2.5rem;
+    margin-top: 1.25rem;
     box-sizing: border-box;
     margin-bottom: 2.5rem;
+    box-shadow: 0px 0px 30px rgba(1, 1, 1, 0.08);
 }
 
 .No-Vaccine {

@@ -1,0 +1,354 @@
+.create-profile-body {
+  background-color: #F5F5F5;
+  min-height: 100vh;
+  padding-bottom: .9375rem;
+}
+
+.create-profile-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  margin: 80px auto;
+  background: #fff;
+  padding: 40px 30px 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #555;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 2px solid #2A2A2A;
+}
+
+.close-btn:hover {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.profile-form-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+  margin-top: -0px;
+}
+
+.profile-form-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.profile-form-header p {
+  color: #A3A3A3;
+  font-size: 14px;
+  text-align: center;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.form-input {
+  background-color: #F5F5F5;
+  border: none;
+  height: 50px;
+  padding: 0 10px;
+  border-radius: 12px;
+  outline: none;
+  font-family: 'Montserrat-Medium', sans-serif;
+  color: #8F8F8F;
+}
+
+.form-input::placeholder {
+  font-family: 'Montserrat-Medium', sans-serif;
+  color: #8F8F8F;
+}
+
+.form-input:focus {
+  border: 2px solid #002ccc;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.button-group button {
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #EBEBEB;
+  background: white;
+  cursor: pointer;
+  width: 100%;
+  height: 48px;
+  transition: background 0.2s, color 0.2s;
+  font-family: 'Montserrat-Medium', sans-serif;
+  color: #2A2A2A;
+}
+
+/* Hover effect for gender/category buttons */
+.button-group button:hover {
+  background-color: #e5e5e5 !important;
+}
+
+/* Active button styling for gender/category */
+.active-btn {
+  background-color: #002ccc !important;
+  color: #fff !important;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.cancel-btn,
+.create-btn-profile {
+  width: 100%;
+  height: 50px;
+  border-radius: 16px;
+  font-family: 'Montserrat-Medium', sans-serif;
+}
+
+.cancel-btn {
+  background: transparent;
+  border: 1px solid #002CCC;
+  color: #002CCC
+}
+
+.create-btn-profile {
+  background-color: #002ccc;
+  color: white;
+  border: none;
+}
+
+.create-btn-profile:disabled {
+  background-color: #A3A3A3;
+  cursor: not-allowed;
+}
+
+.success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+
+
+@media (min-width: 1024px) {
+  .create-profile-wrapper {
+    max-width: 690px;
+    margin: 80px auto;
+    padding: 40px 30px 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  }
+
+  .profile-form-header {
+    margin-top: 0;
+    line-height: 1.2;
+  }
+
+  .profile-form-header h2 {
+    font-size: 34px;
+  }
+
+  .profile-form-header p {
+    font-size: 18px;
+  }
+
+  .profile-form {
+    gap: 20px;
+  }
+
+  .form-group {
+    gap: 20px;
+  }
+
+  .form-input {
+    height: 67px;
+    padding-left: 15px;
+    padding-right: 10px;
+    border-radius: 15px;
+    border: none;
+  }
+
+  .button-group {
+    flex-direction: row;
+    gap: 39px;
+  }
+
+  .button-group button {
+    width: 100%;
+    height: 54px;
+  }
+
+  .form-actions {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .cancel-btn,
+  .create-btn-profile {
+    width: 50%;
+    height: 60px;
+  }
+}
+
+
+
+
+
+
+/* .create-profile-body {
+    background-color: #F5F5F5;
+}
+
+.create-profile-wrapper {
+  max-width: 690px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.form-profile-info {
+    max-width: 80%;
+    margin-left: 30px;
+}
+
+.cancel {
+    margin-top: -80px;
+    margin-left: 550px;
+}
+
+.header {
+    margin-top: -80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 0.05;
+}
+
+.header h2 {
+    font-size: 34px;
+    font-weight: 600;
+}
+
+.header p {
+    color: #A3A3A3;
+    font-size: 18px;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.form-input {
+    background-color: #F5F5F5;
+    border: none;
+    height: 67px;
+    padding-left: 15px;
+    padding-right: 10px;
+    border-radius: 15px;
+}
+
+.button-group {
+  display: flex;
+  gap: 39px;
+  width: 100%;
+}
+
+.button-group button {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: 1px solid #c4c5ca;
+  background: white;
+  cursor: pointer;
+  width: 100%;
+  height: 54px;
+}
+
+.active-btn {
+  background-color: #002ccc;
+  color: white;
+}
+
+.form-actions {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.cancel-btn {
+  background: transparent;
+  border: 1px solid #999;
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 50%;
+  height: 60px;
+}
+
+.create-btn-profile {
+  background-color: #002ccc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 50%;
+  height: 60px;
+}
+
+.success-overlay {
+  position: absolute;      
+  top: 0;                  
+  left: 0;
+  width: 100vw;
+  height: 150vh;
+  background: rgba(0, 0, 0, 0.2); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;           
+} */

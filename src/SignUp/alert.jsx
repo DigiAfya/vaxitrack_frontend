@@ -1,6 +1,6 @@
 import './SignUp.css';
 import '../General/App.css';
-import successIcon from '../public/pictures/Tick.svg';
+import Tick from '../public/pictures/Tick.svg';
 
 export function AccountCreated({ onClose, onContinue }) {
 
@@ -13,7 +13,7 @@ export function AccountCreated({ onClose, onContinue }) {
     <div className="custom-modal" id="customModal">
       <div className="custom-modal-content">
         <span className="close" onClick={onClose}>&times;</span>
-        <img src={successIcon} alt="Success icon" className="success-icon" />
+        <img src={Tick} alt="Success icon" className="success-icon" />
         <h2>Account created successfully!</h2>
         <section>
           <h5>Next Steps:</h5>

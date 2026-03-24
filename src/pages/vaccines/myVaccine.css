@@ -1,0 +1,152 @@
+.vaccine-com-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    background-color: #fff;
+    margin-left: 20px;
+    border-radius: 10px;
+    padding: 20px ;
+}
+
+.com-header{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.com-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.compulsory {
+    background-color: #EBEFFF;
+    color: #1941D1;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 10px;
+}
+
+.due-now {
+    display: flex;
+    gap: 8px;
+}
+
+.due-now img {
+    padding: 0;
+}
+
+.due-now p {
+    color: #FB8831;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.mark-taken {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.mark-taken {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  border-radius: 20px;
+  max-height: 60px;
+}
+
+.mark-taken:hover {
+  background: #f5f5f5;
+}
+
+.taken-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  margin: 0;
+}
+
+.mark-taken.active .taken-circle {
+  background: black;
+}
+
+@media (min-width: 1024px) {
+.vaccine-com-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #fff;
+    margin-top: 40px;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.com-header{
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+}
+
+.com-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.compulsory {
+    background-color: #e0e6fc;
+    color: #1941D1;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.due-now {
+    gap: 15px;
+}
+
+.due-now p {
+    color: #FB8831;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.mark-taken {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.mark-taken {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  border-radius: 20px;
+  max-height: 60px;
+  /* transition: all 0.2s ease; */
+}
+
+.mark-taken:hover {
+  background: #f5f5f5;
+}
+
+.taken-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  margin: 0;
+}
+
+.mark-taken.active .taken-circle {
+  background: black;
+}
+
+}
