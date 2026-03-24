@@ -80,8 +80,18 @@ export function SignIn() {
       });
 
       const responseData = response?.data?.data ?? response?.data ?? {};
-      const accessToken = responseData?.accessToken;
-      const refreshToken = responseData?.refreshToken;
+      const accessToken =
+        responseData?.accessToken ??
+        responseData?.access_token ??
+        responseData?.token ??
+        response?.data?.accessToken ??
+        response?.data?.access_token ??
+        response?.data?.token;
+      const refreshToken =
+        responseData?.refreshToken ??
+        responseData?.refresh_token ??
+        response?.data?.refreshToken ??
+        response?.data?.refresh_token;
 
       if (typeof accessToken === 'string' && accessToken.length > 0) {
         localStorage.setItem('accessToken', accessToken);
@@ -89,6 +99,13 @@ export function SignIn() {
 
       if (typeof refreshToken === 'string' && refreshToken.length > 0) {
         localStorage.setItem('refreshToken', refreshToken);
+      }
+
+      const normalizedEmail = email.trim();
+      if (normalizedEmail.length > 0) {
+        localStorage.setItem('userEmail', normalizedEmail);
+        localStorage.setItem('email', normalizedEmail);
+        localStorage.setItem('loggedInEmail', normalizedEmail);
       }
 
       setInvalidCredentials(false);
@@ -120,6 +137,9 @@ export function SignIn() {
             src={signInImage}
             alt="A female African doctor attending to a female nurse"
             id="signIn-image"
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
           />
         </div>
 
@@ -194,7 +214,7 @@ export function SignIn() {
               </div>
 
 
-              <Link to="/forgot-password" id="forgot-password">Forgot password?</Link>
+              <Link to="/reset" id="forgot-password">Forgot password?</Link>
 
               <div className="button-container">
                 <button

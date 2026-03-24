@@ -18,3 +18,19 @@
     font-size: 20px;
     margin-left: 40px;
 }
+
+@media (max-width: 48rem) {
+    .trust-card p {
+        margin-left: 24px;
+    }
+}
+
+@media (max-width: 24.375rem) {
+    .trust-card p {
+        margin-left: 12px;
+        margin-right: 12px;
+        min-width: 0;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+}

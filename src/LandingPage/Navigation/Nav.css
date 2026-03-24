@@ -36,6 +36,10 @@
   gap: 24px;
 }
 
+.mobileDropdownButtons {
+  display: none;
+}
+
 .navList {
   list-style: none;
   display: flex;
@@ -60,6 +64,12 @@
   display: flex;
   gap: 15px;
   font-family: 'Montserrat-Medium';
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .navBar .signin-btn {
@@ -95,18 +105,14 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   .navBar {
     position: relative;
-    background-color: #ebefff;
-    height: 80px;
-    padding: 20px;
   }
 
   .menuToggle {
     display: block;
-    margin-left: auto;
   }
 
   .navMenu {
@@ -117,7 +123,7 @@
     right: 0;
     background-color: #ebefff;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     padding: 16px 20px 20px;
     gap: 16px;
     border-top: 1px solid #d5ddff;
@@ -133,15 +139,44 @@
     gap: 14px;
     align-items: center;
   }
+}
+
+@media (max-width: 768px) {
+
+  .navBar {
+    background-color: #ebefff;
+    height: 80px;
+    padding: 20px;
+  }
 
   .navBar .btn {
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
+    gap: 8px;
   }
 
   .navBar .signin-btn,
   .navBar .create-btn {
+    height: 40px;
+    font-size: 13px;
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 499px) {
+  .navBar .btn {
+    display: none;
+  }
+
+  .mobileDropdownButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
+    align-items: center;
+  }
+
+  .mobileDropdownButtons .signin-btn,
+  .mobileDropdownButtons .create-btn {
+    width: 100%;
+    max-width: 220px;
   }
 }

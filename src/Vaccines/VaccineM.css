@@ -1,0 +1,159 @@
+.reminder-c,
+.reminder-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(42, 42, 42, 0.45);
+    display: grid;
+    place-items: center;
+    z-index: 1200;
+    padding: 1rem;
+    box-sizing: border-box;
+
+}
+
+.reminder-modal-card {
+    padding: 40px 80px;
+    height: auto;
+    max-height: 42.5625rem;
+    gap: 30px;
+    width: 100%;
+    max-width: 46.875rem;
+}
+
+.reminder-modal-card,
+.reminder-modal {
+    background-color: #FFFFFF;
+    width: 100%;
+    max-width: 46.875rem;
+    height: auto;
+    max-height: 42.5644rem;
+    border-radius: 1rem;
+    padding: 40px 80px;
+    box-sizing: border-box;
+    position: relative;
+    display: grid;
+    gap: 1.875rem;
+
+}
+
+#reminder-s {
+    max-height: 25.8419rem;
+    height: auto;
+    gap: 30px;
+}
+
+.TickIcon {
+    display: block;
+    margin: 0 auto;
+}
+
+#s2{
+    margin-top: -0.9375rem;
+}
+
+.reminder-modal-card h2,
+.reminder-modal h2 {
+    margin: 0;
+    font-family: 'Montserrat-SemiBold', sans-serif;
+    font-size: 36px;
+    line-height: 3.375rem;
+    letter-spacing: 0%;
+    color: #2A2A2A;
+    text-align: center;
+    margin-top: 1.25rem;
+
+}
+
+.reminder-modal-card p,
+.reminder-modal p {
+    margin: 0;
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    letter-spacing: 0%;
+    color: #A3A3A3;
+    text-align: center;
+    margin-top: -1.25rem;
+}
+
+.reminder-modal-close,
+.reminder-close {
+    position: absolute;
+    top: .625rem;
+    right: 90px;
+    border: none;
+    background: transparent;
+    color: #2A2A2A;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    border: 2px solid #2A2A2A;
+    border-radius: 10px;
+    margin-top: 1.25rem;
+
+}
+
+.closeBtn {
+    gap: .625rem;
+    height: auto;
+    max-height: 2.75rem;
+    width: auto;
+    max-width: 36.875rem;
+}
+
+.reminder-form {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.reminder-form label {
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    letter-spacing: 0%;
+    color: #2A2A2A;
+    gap: .9375rem
+}
+
+.reminder-form input {
+    border: 1px solid #D6D6D6;
+    border-radius: .625rem;
+    width: 100%;
+    max-width: 36.875rem;
+    height: 3.75rem;
+    padding: .9375rem;
+    box-sizing: border-box;
+    font-family: 'Montserrat-Medium', sans-serif;
+    font-size: 1rem;
+    color: #8F8F8F;
+    margin-bottom: 37px;
+    border: none;
+    background-color: #F5F5F5;
+}
+
+.reminder-form input:disabled {
+    background-color: #F5F5F5;
+    color: #8F8F8F;
+}
+
+.success-card {
+    text-align: center;
+}
+
+#setbtn {
+    margin-bottom: 2.3125rem;
+}
+
+@media (max-width: 600px) {
+
+    .reminder-modal-card,
+    .reminder-modal {
+        padding: 1rem;
+    }
+
+    .reminder-modal-card h2,
+    .reminder-modal h2 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+}

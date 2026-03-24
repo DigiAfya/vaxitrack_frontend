@@ -76,8 +76,18 @@ export function SignUp() {
       });
 
       const responseData = response?.data?.data ?? response?.data ?? {};
-      const accessToken = responseData?.accessToken;
-      const refreshToken = responseData?.refreshToken;
+      const accessToken =
+        responseData?.accessToken ??
+        responseData?.access_token ??
+        responseData?.token ??
+        response?.data?.accessToken ??
+        response?.data?.access_token ??
+        response?.data?.token;
+      const refreshToken =
+        responseData?.refreshToken ??
+        responseData?.refresh_token ??
+        response?.data?.refreshToken ??
+        response?.data?.refresh_token;
 
       if (typeof accessToken === 'string' && accessToken.length > 0) {
         localStorage.setItem('accessToken', accessToken);
@@ -85,6 +95,12 @@ export function SignUp() {
 
       if (typeof refreshToken === 'string' && refreshToken.length > 0) {
         localStorage.setItem('refreshToken', refreshToken);
+      }
+
+      if (emailValue.length > 0) {
+        localStorage.setItem('userEmail', emailValue);
+        localStorage.setItem('email', emailValue);
+        localStorage.setItem('loggedInEmail', emailValue);
       }
 
       setError('');

@@ -270,7 +270,7 @@
 
 .signIn-right .password-toggle {
     position: absolute;
-    right: 12px;
+    right: 40px;
     top: 50%;
     transform: translateY(-50%);
     border: none;

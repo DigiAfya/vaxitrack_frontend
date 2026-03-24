@@ -79,6 +79,7 @@ export function RPassword() {
                             onChange={(event) => setNewPassword(event.target.value)}
                             onFocus={() => setShowPasswordMessage(true)}
                             onBlur={() => setShowPasswordMessage(false)}
+                            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$"
                         />
                         <button
                             type="button"
@@ -100,6 +101,7 @@ export function RPassword() {
                             <p id="letter" className={hasLowercase ? "valid" : "invalid"}>A <b>lowercase</b> letter</p>
                             <p id="capital" className={hasUppercase ? "valid" : "invalid"}>A <b>capital (uppercase)</b> letter</p>
                             <p id="number" className={hasNumber ? "valid" : "invalid"}>A <b>number</b></p>
+                            <p id="special" className={hasSpecialChar ? "valid" : "invalid"}>A <b>special character (!@#$%^&*)</b></p>
                             <p id="length" className={hasMinLength ? "valid" : "invalid"}>Minimum <b>8 characters</b></p>
                         </div>
                     )}
@@ -133,7 +135,6 @@ export function RPassword() {
                             />
                         </button>
                     </div>
-                    <p id="Pas-p">Password should contain at least 8 characters</p>
                 </form>
 
                 <button
