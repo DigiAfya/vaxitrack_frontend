@@ -1,5 +1,5 @@
 import { Navbar } from '../pages/Navbar/Navbar';
-import MedicalRecord from '../public/pictures/MedicalRecord.svg';
+import MedicalRecord from '../public/pictures/MedicalRecord.webp';
 import './Reminder.css';
 import '../Vaccines/Vaccines.css';
 import { useContext } from 'react';

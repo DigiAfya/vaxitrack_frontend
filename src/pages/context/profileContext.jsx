@@ -1,5 +1,6 @@
 import { createContext, useEffect, useMemo, useState } from "react";
 import { api } from "../../Api/api";
+import { countRemindersByStatus } from "../../Api/reminders";
 
 export const ProfileContext = createContext();
 
@@ -178,8 +179,9 @@ export function ProfileProvider({ children }) {
   };
 
   const syncProfileCountsFromReminders = (profileId, reminders = []) => {
-    const dueCount = reminders.filter((item) => item?.status === "due").length;
-    const overdueCount = reminders.filter((item) => item?.status === "overdue").length;
+    const counts = countRemindersByStatus(reminders);
+    const dueCount = counts.due;
+    const overdueCount = counts.overdue;
 
     updateProfileCountsById(profileId, (profile) => {
       const previousTaken = Math.max(
@@ -218,6 +220,8 @@ export function ProfileProvider({ children }) {
   };
 
   const fetchProfiles = async () => {
+    setProfilesLoaded(false);
+
     for (const endpoint of PROFILE_FETCH_ENDPOINTS) {
       try {
         const response = await api.get(endpoint);
@@ -229,7 +233,11 @@ export function ProfileProvider({ children }) {
         setProfiles(items);
 
         if (items.length > 0) {
-          setActiveProfile((prev) => prev ?? items[0].id);
+          setActiveProfile((prev) => {
+            const previousId = Number(prev);
+            const hasPrevious = items.some((item) => item.id === previousId);
+            return hasPrevious ? previousId : items[0].id;
+          });
           window.localStorage.setItem("activeProfileCategory", items[0].category);
         } else {
           setActiveProfile(null);
@@ -252,6 +260,18 @@ export function ProfileProvider({ children }) {
 
   useEffect(() => {
     fetchProfiles();
+  }, []);
+
+  useEffect(() => {
+    const handleAuthChanged = () => {
+      fetchProfiles();
+    };
+
+    window.addEventListener("auth:changed", handleAuthChanged);
+
+    return () => {
+      window.removeEventListener("auth:changed", handleAuthChanged);
+    };
   }, []);
 
   const addProfile = async (profile) => {
@@ -337,19 +357,21 @@ export function ProfileProvider({ children }) {
       setProfileError("");
       await api.delete(`/api/v1/profiles/my/${profileId}`);
 
-      setProfiles((prev) => {
-        const nextProfiles = prev.filter((profile) => profile.id !== profileId);
+      const nextProfiles = profiles.filter((profile) => profile.id !== profileId);
+      setProfiles(nextProfiles);
 
-        if (nextProfiles.length === 0) {
-          window.localStorage.removeItem("activeProfileCategory");
-        } else {
-          window.localStorage.setItem("activeProfileCategory", nextProfiles[0].category);
-        }
+      // Clean up localStorage entries for the deleted profile
+      window.localStorage.removeItem(`dashboardManualTakenIds:${profileId}`);
 
-        return nextProfiles;
-      });
+      if (nextProfiles.length === 0) {
+        window.localStorage.removeItem("activeProfileCategory");
+        setActiveProfile(null);
+      } else {
+        window.localStorage.setItem("activeProfileCategory", nextProfiles[0].category);
+        // Auto-select first profile if the deleted profile was active
+        setActiveProfile((prev) => prev === profileId ? nextProfiles[0].id : prev);
+      }
 
-      setActiveProfile((prev) => (prev === profileId ? null : prev));
       return { success: true };
     } catch (error) {
       const message = extractApiErrorMessage(error, "Unable to delete profile.");

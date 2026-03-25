@@ -4,7 +4,7 @@
   min-height: 100vh;
   padding: 0;
   gap: 1.25rem;
-  
+
 
 }
 
@@ -12,14 +12,6 @@
   /* Default Light Mode Styles */
   --background: #ffffff;
   --text: #000000;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark Mode Styles */
-    --background: #1a1a1a;
-    --text: #ffffff;
-  }
 }
 
 body {

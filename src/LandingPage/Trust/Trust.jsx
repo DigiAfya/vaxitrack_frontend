@@ -8,7 +8,7 @@ import warning from "../../public/pictures/image/warning.svg";
 
 export function Trust() {
   return (
-    <div className="trust-wrapper">
+    <div className="trust-wrapper" id="credibility">
       <h2>Trust & Credibility</h2>
 
       <div className="trust-trust">

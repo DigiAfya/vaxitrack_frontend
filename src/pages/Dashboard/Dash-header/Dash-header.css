@@ -120,15 +120,6 @@
     }
 }
 
-.lorem {
-    font-size: 20px;
-    border: 1px solid #002CCC;
-    color: #002CCC;
-    border-radius: 15px;
-    padding: 10px 20px;
-    background: transparent;
-}
-
 .switch {
     font-size: 18px;
     border: none;

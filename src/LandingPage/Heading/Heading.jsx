@@ -1,6 +1,6 @@
 import "./Heading.css";
 import { Button } from "../Button/Button.jsx";
-import vaccineImage from "../../public/pictures/image/Vaccine.svg";
+import vaccineImage from "../../public/pictures/image/Vaccine.webp";
 import { useNavigate } from "react-router-dom";
 
 export function Heading() {

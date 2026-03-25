@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import ColoredInfo from '../public/pictures/ColoredInfo.svg';
 import InfoSquare from '../public/pictures/InfoSquare.svg';
 import './Explanation.css';
-import Disclaimer from '../public/pictures/disclaimer.svg';
+import Disclaimer from '../public/pictures/Disclaimer.svg';
 
 export function BCG({ onClose }) {
 
@@ -15,7 +15,7 @@ export function BCG({ onClose }) {
                 <p>The BCG vaccine helps protect against tuerculosis (TB), a serious infection
                     that mainly affects the lungs but can also affect other parts of the body. </p>
                 <p>The BCG vaccine is typically given at birth or within the first few weeks of life.</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+                    <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -31,7 +31,7 @@ export function pentavelent({ onClose }) {
                 <p>Protection against Diphtheria, Tetanus, Pertussis(DTP), Hepatitis B (Hep B) and
                     Haemophilus influenzae type B(Hi b)</p>
                 <p>Combined vaccine, usually taken by infants at about 6, 10 and 14 weeks in three doses</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+                <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -48,7 +48,7 @@ export function MMR({ onClose }) {
                 <p>It serves as protection from mumps, measles and rubella(German measles),
                     which are viral diseases.</p>
                 <p>Taken at 6 months</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+               <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -65,7 +65,7 @@ export function DTPBooster({ onClose }) {
                 <p>This is booster protection for Diphteria, Tetanus, Pertussis(DTP) and is<br />
                     administered to babies about 15months of age or older. </p>
                 <p>Taken at 15 months</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+               <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -84,7 +84,7 @@ export function Influenza({ onClose }) {
                     months and older, particularly high-risk groups like the elderly, pregnant <br />
                     individuals, and those with chronic conditions </p>
                 <p>Recommended for everyone aged 6 months and older.</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+                <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -102,7 +102,7 @@ export function Meningococcal({ onClose }) {
                     pertussis (whooping cough). Recommended at ages 11-12 to maintain immunity<br />
                     from childhood DTP vaccines.</p>
                 <p>Recommended at ages 11-12.</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+              <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -116,10 +116,10 @@ export function HepatitisB({ onClose }) {
                 <img src={ColoredInfo} alt="Info" className="vaccine-info-icon" />
                 <h2>Hepatitis B</h2>
                 <h5>Hepatitis B</h5>
-                <p>It is usually given at birth and protects against Hepatitis B infection, which is a
+                <p>It is usually given at birth and protects against Hepatitis B infection, which is a 
                     serious, often chronic, liver infection caused by the Hepatitis B Virus (HBV).</p>
                 <p>The vaccine is typically given at birth or within the first few weeks of life.</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+                <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -137,7 +137,7 @@ export function PCV({ onClose }) {
                     infections(sepsis) and ear/sinus infections.</p>
                 <p>Three doses taken in three doses at about 6, 10 and 14 weeks of age to prevent
                     pneumococcal disease.</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+                <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -154,7 +154,7 @@ export function YellowFever({ onClose }) {
                 <p>It prevents yellow fever, which is an acute viral hemorrhagic disease transmitted
                     by Aedes mosquitoes in tropical Africa and South America</p>
                 <p>Usually taken by babies who are 9months old or older.</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+                <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -173,7 +173,7 @@ export function HPV({ onClose }) {
                     cases. Prevention is highly effective through the HPV vaccine, which reduces risk<br />
                     by up to 90%, and regular screening (Pap/HPV tests)</p>
                 <p>Taken at adolescence age</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+               <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -190,7 +190,7 @@ export function Covid({ onClose }) {
                 <p>COVID-19 vaccine causes the immune system to create proteins called antibodies.<br />
                     These proteins fight infection with the COVID-19 virus.</p>
                 <p>Taken at adulthood.</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+               <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -207,7 +207,7 @@ export function OpvIpv({ onClose }) {
                     poliovirus.</p>
                 <p>The Oral polio vaccine is usually taken in three doses at about 6, 19 and 14 weeks
                     of age.</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+                <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -223,7 +223,7 @@ export function Rotavirus({ onClose }) {
                 <h5>Rotavirus</h5>
                 <p>It prevents severe diarrhea in infants and young children caused by the rotavirus.</p>
                 <p>This vaccination is taken in two doses at about 6 and 10 weeks of age.</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+                <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -240,9 +240,9 @@ export function MCV({ onClose }) {
                 <p>Meningitis is an infection. It causes swelling, called inflammation, of the fluid and
                     membranes around the brain and spinal cord which most often triggers
                     symptoms such as headache, fever and a stiff neck.</p>
-                <p>This vaccine can be given as a standalone vaccination at about 1 year of age to
+                <p>This vaccine can be given as a standalone vaccination at about 1 year of age to 
                     prevent Meningitis.</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+              <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -260,7 +260,7 @@ export function Hepatitis({ onClose }) {
                     received the vaccine. It is highly effective and safe, taken in 2- or 3-dose series that
                     provides lifelong protection.</p>
                 <p>Taken at adulthood</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+                <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )
@@ -276,7 +276,7 @@ export function Tdap({ onClose }) {
                 <h5>Tetanus, diphteria and pertussis</h5>
                 <p>Booster for tetanus, diphteria and pertussis</p>
                 <p>Taken at adolescence age.</p>
-                <img src={Disclaimer} alt="Disclaimer" />
+                <img src={Disclaimer} alt="Disclaimer"/>
             </div>
         </>
     )

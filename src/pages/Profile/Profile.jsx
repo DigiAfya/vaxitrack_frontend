@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "../Navbar/Navbar";
 import { ProfileContext } from "../context/profileContext";
-import { getTemporaryReminders } from "../../Api/reminders";
+import { countRemindersByStatus, fetchProfileReminders, getTemporaryReminders, mergeReminderLists } from "../../Api/reminders";
 import writeIcon from "../../public/pictures/image/Write.svg";
 import deleteIcon from "../../public/pictures/image/Delete.svg";
-import shield from "../../public/pictures/image/shield.svg";
+import shield from "../../public/pictures/image/shield.webp";
 import { Delogout } from "./delogout";
 import "../Dashboard/Dash-body/DashBody.css";
 import "./Profile.css";
@@ -121,9 +121,76 @@ export function Profile() {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [selectedProfileId, setSelectedProfileId] = useState(null);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [profileRemindersById, setProfileRemindersById] = useState({});
+    const [statusClock, setStatusClock] = useState(Date.now());
     const loggedInEmail = resolveLoggedInEmail();
     const profileCount = profiles?.length ?? 0;
     const hasTwoOrMoreProfiles = profileCount >= 2;
+
+    useEffect(() => {
+        const intervalId = window.setInterval(() => {
+            setStatusClock(Date.now());
+        }, 60000);
+
+        return () => {
+            window.clearInterval(intervalId);
+        };
+    }, []);
+
+    useEffect(() => {
+        let isMounted = true;
+
+        const loadRemindersByProfile = async () => {
+            if (!profilesLoaded || !Array.isArray(profiles) || profiles.length === 0) {
+                if (isMounted) {
+                    setProfileRemindersById({});
+                }
+                return;
+            }
+
+            const visibleProfiles = profiles.slice(0, 4);
+
+            setProfileRemindersById({});
+
+            visibleProfiles.forEach((profile) => {
+                (async () => {
+                    const tempReminders = getTemporaryReminders(profile.id);
+
+                    let mergedReminders = tempReminders;
+
+                    try {
+                        const backendReminders = await fetchProfileReminders(profile.id);
+                        mergedReminders = mergeReminderLists(backendReminders, tempReminders);
+                    } catch {
+                        mergedReminders = tempReminders;
+                    }
+
+                    if (!isMounted) return;
+
+                    setProfileRemindersById((prev) => ({
+                        ...prev,
+                        [profile.id]: mergedReminders,
+                    }));
+                })();
+            });
+        };
+
+        loadRemindersByProfile();
+
+        return () => {
+            isMounted = false;
+        };
+    }, [profilesLoaded, profiles, dashboardRefreshKey]);
+
+    const reminderCountsByProfile = useMemo(() => {
+        const now = new Date(statusClock);
+        return Object.fromEntries(
+            Object.entries(profileRemindersById).map(([profileId, reminders]) => [
+                profileId,
+                countRemindersByStatus(reminders, now),
+            ])
+        );
+    }, [profileRemindersById, statusClock]);
 
     if (!profilesLoaded) {
         return null;
@@ -238,9 +305,10 @@ export function Profile() {
                         const tempReminders = getTemporaryReminders(profile.id);
                         const tempDue = tempReminders.filter((r) => r.status === "due").length;
                         const tempOverdue = tempReminders.filter((r) => r.status === "overdue").length;
-                        const total = Number(profile?.total ?? 0) + tempDue + tempOverdue;
-                        const due = Number(profile?.due ?? 0) + tempDue;
-                        const overdue = Number(profile?.overdue ?? 0) + tempOverdue;
+                        const computedCounts = reminderCountsByProfile[profile.id];
+                        const total = computedCounts?.total ?? (Number(profile?.total ?? 0) + tempDue + tempOverdue);
+                        const due = computedCounts?.due ?? (Number(profile?.due ?? 0) + tempDue);
+                        const overdue = computedCounts?.overdue ?? (Number(profile?.overdue ?? 0) + tempOverdue);
 
                         return (
                             <article className="profile-card" key={profile.id}>

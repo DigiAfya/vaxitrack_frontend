@@ -7,12 +7,12 @@ import '../General/App.css';
 import '../General/index.css';
 import './SignIn.css';
 import whiteLogo from '../public/pictures/WhiteLogo.svg';
-import signInImage from '../public/pictures/SignInPic.svg';
+import signInImage from '../public/pictures/SignInPic.webp';
 import messageIcon from '../public/pictures/Message.svg';
 import eyeOpenedIcon from '../public/pictures/eyeOpened.svg';
 import eyeClosedIcon from '../public/pictures/eyeClosed.svg';
 import googleIcon from '../public/pictures/google.svg';
-import InvalidP from '../public/pictures/invalidP.svg';
+import InvalidP from '../public/pictures/InvalidP.svg';
 
 export function SignIn() {
   const navigate = useNavigate();
@@ -101,6 +101,8 @@ export function SignIn() {
         localStorage.setItem('refreshToken', refreshToken);
       }
 
+      window.dispatchEvent(new Event('auth:changed'));
+
       const normalizedEmail = email.trim();
       if (normalizedEmail.length > 0) {
         localStorage.setItem('userEmail', normalizedEmail);
@@ -137,9 +139,6 @@ export function SignIn() {
             src={signInImage}
             alt="A female African doctor attending to a female nurse"
             id="signIn-image"
-            loading="lazy"
-            decoding="async"
-            fetchPriority="low"
           />
         </div>
 

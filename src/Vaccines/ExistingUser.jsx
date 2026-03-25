@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import '../General/App.css';
 import './Vaccines.css';
 import './ExistingUser.css';
@@ -20,6 +20,7 @@ export function ExistingProfile() {
     const [reminderVaccine, setReminderVaccine] = useState('');
     const [selectedReminderVaccine, setSelectedReminderVaccine] = useState(null);
     const [vaccines, setVaccines] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const [profileCategory] = useState(() => {
         const savedCategory = window.localStorage.getItem('activeProfileCategory');
         return savedCategory === 'adult' ? 'adult' : 'child';
@@ -235,7 +236,27 @@ export function ExistingProfile() {
             return;
         }
 
+        const parseDoseCount = (value) => {
+            const asNumber = Number(value);
+
+            if (Number.isFinite(asNumber) && asNumber > 0) {
+                return Math.floor(asNumber);
+            }
+
+            const text = String(value ?? '').trim().toLowerCase();
+            const match = text.match(/(\d+)/);
+
+            if (!match) {
+                return 1;
+            }
+
+            const parsed = Number(match[1]);
+            return Number.isFinite(parsed) && parsed > 0 ? Math.floor(parsed) : 1;
+        };
+
         const persistTemporaryReminder = (resolvedVaccineId = null) => {
+            const totalDoses = parseDoseCount(selectedReminderVaccine?.doses);
+
             saveTemporaryReminder({
                 id: `temp-${Date.now()}-${resolvedVaccineId ?? 'no-id'}`,
                 profileId: Number(profileId),
@@ -245,6 +266,8 @@ export function ExistingProfile() {
                 createdAt: new Date().toISOString(),
                 status: 'due',
                 reminderType: selectedReminderVaccine?.type,
+                totalDoses,
+                doseNumber: 1,
             });
 
             setIsReminderModalOpen(false);
@@ -287,6 +310,28 @@ export function ExistingProfile() {
         setSelectedVaccine(vaccineLabel);
     };
 
+    const filteredVaccines = useMemo(() => {
+        const query = searchQuery.trim().toLowerCase();
+
+        if (!query) {
+            return vaccines;
+        }
+
+        return vaccines.filter((vaccine) => {
+            const searchableContent = [
+                vaccine?.name,
+                vaccine?.ageRange,
+                vaccine?.category,
+                vaccine?.type,
+                vaccine?.doses,
+            ]
+                .map((value) => String(value ?? '').toLowerCase())
+                .join(' ');
+
+            return searchableContent.includes(query);
+        });
+    }, [vaccines, searchQuery]);
+
     return (
         <>
             <Navbar />
@@ -304,7 +349,13 @@ export function ExistingProfile() {
                             <div className='existing-user-instruction'>
                                 <p>Click on each vaccine to learn more</p>
                                 <section className="search-vaccine">
-                                    <input type="text" className="search-input" placeholder="Search vaccines by name or description..." />
+                                    <input
+                                        type="text"
+                                        className="search-input"
+                                        placeholder="Search vaccines by name or description..."
+                                        value={searchQuery}
+                                        onChange={(event) => setSearchQuery(event.target.value)}
+                                    />
                                     <img src={Search} alt="" id="search-icon" />
                                 </section>
                             </div>
@@ -321,7 +372,7 @@ export function ExistingProfile() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {vaccines.map((vaccine) => {
+                                        {filteredVaccines.map((vaccine) => {
                                             const eligible = isEligible(vaccine.category);
 
                                             return (
@@ -356,6 +407,12 @@ export function ExistingProfile() {
                                                 </tr>
                                             );
                                         })}
+
+                                        {filteredVaccines.length === 0 && (
+                                            <tr>
+                                                <td colSpan={6}>No vaccines match your search.</td>
+                                            </tr>
+                                        )}
                                     </tbody>
                                 </table>
                             </section>

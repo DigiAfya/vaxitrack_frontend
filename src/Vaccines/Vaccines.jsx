@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../pages/Navbar/Navbar';
 import { ExistingProfile } from './ExistingUser';
 import { ProfileContext } from '../pages/context/profileContext';
-import Syringe from '../public/pictures/Syringe.svg';
+import Syringe from '../public/pictures/Syringe.webp';
 
 /*export function Navboard() {
     const [showProfileOptions, setShowProfileOptions] = useState(false);

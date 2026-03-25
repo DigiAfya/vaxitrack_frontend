@@ -7,7 +7,7 @@ import whiteIcon from "../../public/pictures/image/whiteicon.svg";
 export function Footer() {
   return (
     <div className="footer-wrapper">
-      <div className="help">
+      <div className="help" id="help-support">
         <h4>
           Need Help? <br /> We're Here for you{" "}
         </h4>
