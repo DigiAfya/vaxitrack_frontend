@@ -6,10 +6,10 @@ import send from "../../../public/pictures/image/send.svg";
 
 export default function ChatBot({ visible, onClose }) {
   const [messages, setMessages] = useState([
-    { 
-      sender: "ai", 
+    {
+      sender: "ai",
       text: "Hello! I'm VaxiBot AI, your personal vaccine companion. I can help you with questions, provide daily tips, and guide you to reliable vaccine information. How can I assist you today?",
-      avatar: chatBotLogo, // display chatbotIcon as avatar
+      avatar: chatBotLogo,
     },
   ]);
   const [input, setInput] = useState("");
@@ -23,22 +23,20 @@ export default function ChatBot({ visible, onClose }) {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
 
     const now = new Date();
     const time = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
-    // Add user message
+    const userQuestion = input;
+
     setMessages((prev) => [
-      ...prev, 
+      ...prev,
       { sender: "user", text: input, time }
     ]);
     setInput("");
 
-
-    // Call VaxiBot API
-    const userQuestion = input;
     const { askChatbot } = await import("../../../Api/chatbotService");
     try {
       const answer = await askChatbot(userQuestion);
@@ -56,7 +54,7 @@ export default function ChatBot({ visible, onClose }) {
         { sender: "ai", text: "Sorry, I could not get a response. Please try again.", time: aiTime, avatar: chatBotLogo }
       ]);
     }
-
+  };
 
   if (!visible) return null;
 
@@ -67,7 +65,6 @@ export default function ChatBot({ visible, onClose }) {
           ✕
         </button>
 
-        {/* Header + disclaimer */}
         <div className="chatbot-header-wrapper">
           <div className="chatbot-header">
             <img src={chatBotLogo} alt="VaxiBot" />
@@ -86,7 +83,6 @@ export default function ChatBot({ visible, onClose }) {
           </div>
         </div>
 
-        {/* Messages */}
         <div className="chatbot-messages">
           {messages.map((msg, idx) => (
             <div
@@ -105,7 +101,6 @@ export default function ChatBot({ visible, onClose }) {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
         <div className="chatbot-input-container">
           <input
             type="text"
@@ -124,9 +119,6 @@ export default function ChatBot({ visible, onClose }) {
         </div>
 
       </div>
-
-       
-
     </div>
   );
 }
