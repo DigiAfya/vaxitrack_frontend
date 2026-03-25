@@ -2,7 +2,13 @@ import { useState, useRef, useEffect } from "react";
 import chatBotLogo from "../../../public/pictures/image/chatBot.svg";
 import botBox from "../../../public/pictures/image/botBox.svg";
 import send from "../../../public/pictures/image/send.svg";
-
+function formatBotMessage(text) {
+  if (!text) return '';
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/(\d+)\.\s/g, '<br/>$1. ')
+    .replace(/\n/g, '<br/>');
+}
 
 export default function ChatBot({ visible, onClose }) {
   const [messages, setMessages] = useState([
@@ -93,7 +99,7 @@ export default function ChatBot({ visible, onClose }) {
                 {msg.sender === "ai" && <img src={msg.avatar} alt="VaxiBot" />}
               </div>
               <div className="message-content">
-                <p>{msg.text}</p>
+		<div className="message-text" dangerouslySetInnerHTML={{ __html: formatBotMessage(msg.text) }} />
                 {msg.time && <span className="message-time">{msg.time}</span>}
               </div>
             </div>
