@@ -12,7 +12,7 @@ import messageIcon from '../public/pictures/Message.svg';
 import eyeOpenedIcon from '../public/pictures/eyeOpened.svg';
 import eyeClosedIcon from '../public/pictures/eyeClosed.svg';
 import googleIcon from '../public/pictures/google.svg';
-import InvalidP from '../public/pictures/InvalidP.svg';
+import InvalidP from '../public/pictures/invalidP.svg';
 
 export function SignIn() {
   const navigate = useNavigate();
