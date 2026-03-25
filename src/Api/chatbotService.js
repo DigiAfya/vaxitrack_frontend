@@ -2,9 +2,8 @@ import { api } from "./api";
 
 export const askChatbot = async (question) => {
   try {
-    const res = await api.post("/v1/faqs/ask", {
+    const res = await api.post("/api/v1/vaxibot/ask", {
       question,
-      targetType: "vaccine", // or "general"
     });
 
     return res.data?.data?.answer || "No answer found.";
@@ -13,19 +12,3 @@ export const askChatbot = async (question) => {
     return "Something went wrong while asking the assistant.";
   }
 };
-
-
-
-
-
-
-// import { api } from "./api";
-
-// export const askChatbot = async (question) => {
-//   const res = await api.post("/v1/faqs/ask", {
-//     question,
-//     targetType: "vaccine",
-//   });
-
-//   return res.data?.data?.answer;
-// };

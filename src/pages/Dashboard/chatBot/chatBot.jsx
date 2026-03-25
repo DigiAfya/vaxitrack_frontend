@@ -36,16 +36,27 @@ export default function ChatBot({ visible, onClose }) {
     ]);
     setInput("");
 
-    // Simulate AI response (replace with API call)
-    setTimeout(() => {
+
+    // Call VaxiBot API
+    const userQuestion = input;
+    const { askChatbot } = await import("../../../Api/chatbotService");
+    try {
+      const answer = await askChatbot(userQuestion);
       const aiNow = new Date();
       const aiTime = aiNow.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
       setMessages((prev) => [
         ...prev,
-        { sender: "ai", text: `You said: "${input}"`, time: aiTime, avatar: chatBotLogo }
+        { sender: "ai", text: answer, time: aiTime, avatar: chatBotLogo }
       ]);
-    }, 1000);
-  };
+    } catch (err) {
+      const aiNow = new Date();
+      const aiTime = aiNow.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      setMessages((prev) => [
+        ...prev,
+        { sender: "ai", text: "Sorry, I could not get a response. Please try again.", time: aiTime, avatar: chatBotLogo }
+      ]);
+    }
+
 
   if (!visible) return null;
 
