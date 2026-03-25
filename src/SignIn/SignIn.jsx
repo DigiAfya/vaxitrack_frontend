@@ -13,6 +13,7 @@ import eyeOpenedIcon from '../public/pictures/eyeOpened.svg';
 import eyeClosedIcon from '../public/pictures/eyeClosed.svg';
 import googleIcon from '../public/pictures/google.svg';
 import InvalidP from '../public/pictures/invalidP.svg';
+import { useNotification } from '../Notifications/NotificationContext';
 
 export function SignIn() {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ export function SignIn() {
   const [invalidCredentials, setInvalidCredentials] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const formRef = useRef(null);
+  const { notify } = useNotification();
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID?.trim() ?? '';
   const hasGoogleClientId = googleClientId.length > 0;
 
@@ -109,9 +111,11 @@ export function SignIn() {
       }
 
       setInvalidCredentials(false);
+      notify.success('Login successful');
       navigate('/dashboard');
     } catch (error) {
       console.log(error);
+      notify.error('Invalid email or password');
       setInvalidCredentials(true);
       setSignInClicked(false);
     }
