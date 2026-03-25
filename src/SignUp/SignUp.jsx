@@ -13,6 +13,7 @@ import eyeOpenedIcon from '../public/pictures/eyeOpened.svg';
 import eyeClosedIcon from '../public/pictures/eyeClosed.svg';
 import plusWhiteIcon from '../public/pictures/plusWhite.svg';
 import googleIcon from '../public/pictures/google.svg';
+import { useNotification } from '../Notifications/NotificationContext';
 
 export function SignUp() {
   const [password, setPassword] = useState("");
@@ -25,6 +26,7 @@ export function SignUp() {
   const [showPasswordMessage, setShowPasswordMessage] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const formRef = useRef(null);
+  const { notify } = useNotification();
   const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID?.trim() ?? '';
   const hasGoogleClientId = googleClientId.length > 0;
 
@@ -105,6 +107,7 @@ export function SignUp() {
 
       setError('');
       setCreateAccountClicked(false);
+      notify.success('Account created successfully');
       setAccountCreated(true);
 
     } catch (error) {
@@ -113,6 +116,11 @@ export function SignUp() {
         error?.response?.data?.error ||
         error?.message ||
         'Registration failed. Please try again.';
+
+      notify.error(errorMessage);
+      setError(
+        errorMessage
+      );
 
       setError(
         errorMessage
