@@ -37,23 +37,30 @@ export function SignIn() {
             Authorization: `Bearer ${tokenResponse.access_token}`,
           },
         });
-
-        const googleUser = response.data;
+	
+	
+	const googleUser = response.data;
         window.localStorage.setItem('googleUser', JSON.stringify(googleUser));
-        window.alert(`Signed in with Google as ${googleUser.email}.`);
+        window.localStorage.setItem('userEmail', googleUser.email);
+        window.localStorage.setItem('email', googleUser.email);
+        window.localStorage.setItem('loggedInEmail', googleUser.email);
+        window.dispatchEvent(new Event('auth:changed'));
+        notify.success('Signed in with Google as ' + googleUser.email);
+        navigate('/dashboard');
+
       } catch {
-        window.alert('Google sign-in succeeded, but user profile could not be loaded.');
+        notify.error('Google sign-in succeeded, but user profile could not be loaded.');
       } finally {
         setGoogleLoading(false);
       }
     },
     onError: () => {
       setGoogleLoading(false);
-      window.alert('Google sign-in failed. Please try again.');
+      notify.error('Google sign-in failed. Please try again.');
     },
     onNonOAuthError: () => {
       setGoogleLoading(false);
-      window.alert('Google sign-in was cancelled or could not be completed.');
+      notify.warning('Google sign-in was cancelled or could not be completed.');
     },
   });
 
