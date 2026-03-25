@@ -2,7 +2,7 @@ import { SearchCard } from "../SearchCard/SearchCard";
 import "./Section.css"
 export function Section() {
   return (
-    <div className="section-why">
+    <div className="section-why" id="how-it-works">
       <h2 >Why Vaccine Tracking Matters</h2>
       <p>
         Without reminders or clear guidance, important immunisations may be <br />

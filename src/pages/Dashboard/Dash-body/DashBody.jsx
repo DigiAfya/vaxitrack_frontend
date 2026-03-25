@@ -3,7 +3,8 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { ProfileContext } from "../../context/profileContext.jsx";
 import { Button } from "../../../LandingPage/Button/Button.jsx";
 import { api } from "../../../Api/api.js";
-import shield from "../../../public/pictures/image/shield.svg";
+import { deleteProfileReminder, getStoredDoseProgress, updateProfileReminder, updateStoredDoseProgress, updateTemporaryReminder } from "../../../Api/reminders.js";
+import shield from "../../../public/pictures/image/shield.webp";
 import taken from "../../../public/pictures/image/taken.svg";
 import due from "../../../public/pictures/image/due.svg";
 import overdue from "../../../public/pictures/image/overdue.svg";
@@ -11,6 +12,9 @@ import plus from "../../../public/pictures/image/plus.svg";
 import edit from "../../../public/pictures/image/edit.svg";
 import share from "../../../public/pictures/image/share.svg";
 import Btime from "../../../public/pictures/BTime.svg";
+import Rtime from "../../../public/pictures/Rtime.svg";
+import chatBotIcon from "../../../public/pictures/image/chatBot.svg";
+import ChatBot from "../chatBot/chatBot.jsx";
 import "./DashBody.css";
 
 /* 🔥 SINGLE SOURCE OF TRUTH */
@@ -20,11 +24,54 @@ const getFullName = (profile) =>
     .join(" ");
 
 const TEMP_REMINDERS_KEY = "temporaryDashboardReminders";
+const MANUAL_TAKEN_KEY_PREFIX = "dashboardManualTakenIds";
+
+const MULTI_DOSE_TOTALS = {
+  "opv/ipv": 3,
+  pentavalent: 3,
+  pcv: 3,
+  rotavirus: 2,
+  "dtp booster": 3,
+  dtap: 3,
+  hpv: 2,
+  influenza: 5,
+  flu: 5,
+  "hepatitis b": 3,
+  "meningococcal acwy": 2,
+};
+
+const normalizeVaccineKey = (value) => String(value ?? "").trim().toLowerCase();
+
+const resolveTotalDoses = (item) => {
+  const explicit = Number(item?.totalDoses ?? item?.doses);
+
+  if (Number.isFinite(explicit) && explicit > 1) {
+    return Math.floor(explicit);
+  }
+
+  const vaccineName = normalizeVaccineKey(item?.name ?? item?.vaccineName);
+  const exact = MULTI_DOSE_TOTALS[vaccineName];
+
+  if (exact) {
+    return exact;
+  }
+
+  return Object.entries(MULTI_DOSE_TOTALS).find(([key]) =>
+    vaccineName.includes(key) || key.includes(vaccineName)
+  )?.[1] ?? 1;
+};
+
+const addOneWeek = (value) => {
+  const parsed = new Date(value ?? Date.now());
+  const base = Number.isNaN(parsed.getTime()) ? new Date() : parsed;
+  base.setDate(base.getDate() + 7);
+  return base.toISOString();
+};
 
 export function DashBody() {
   const navigate = useNavigate();
 
-  const { profiles, profilesLoaded, activeProfile, setActiveProfile, dashboardRefreshKey } =
+  const { profiles, profilesLoaded, activeProfile, setActiveProfile, dashboardRefreshKey, notifyDashboardRefresh } =
     useContext(ProfileContext);
 
   const [activeStatus, setActiveStatus] = useState("all");
@@ -32,7 +79,8 @@ export function DashBody() {
   const [recommendations, setRecommendations] = useState([]);
   const [loadingDashboard, setLoadingDashboard] = useState(false);
   const [dashboardError, setDashboardError] = useState("");
-  const [takenToggleByCard, setTakenToggleByCard] = useState({});
+  const [manuallyTakenIds, setManuallyTakenIds] = useState(new Set());
+  const [chatVisible, setChatVisible] = useState(false);
 
   const selectedProfile = useMemo(
     () => profiles.find((profile) => profile.id === activeProfile) ?? null,
@@ -43,14 +91,25 @@ export function DashBody() {
     if (!Array.isArray(items)) return [];
 
     return items.map((item, index) => ({
-      id: item?.vaccine_id ?? `${item?.Vaccine?.name ?? "vaccine"}-${index}`,
+      id:
+        item?.reminder_id ??
+        item?.reminderId ??
+        item?.id ??
+        item?.vaccine_id ??
+        `${item?.Vaccine?.name ?? "vaccine"}-${index}`,
       name: item?.Vaccine?.name ?? item?.name ?? "Vaccine",
+      vaccineId: item?.vaccine_id ?? item?.vaccineId ?? item?.Vaccine?.id ?? null,
+      dueDate: item?.due_date ?? item?.dueDate ?? item?.start_time ?? item?.startTime ?? "",
       subtitle:
         item?.Vaccine?.age_range ??
         item?.recommended_age ??
         item?.status ??
         "Vaccination record",
       status: item?.status ?? "",
+      totalDoses: item?.total_doses ?? item?.totalDoses ?? item?.dose_sequence ?? item?.Vaccine?.dose_sequence ?? item?.Vaccine?.doses ?? null,
+      doseNumber: item?.dose_number ?? item?.doseNumber ?? item?.current_dose ?? item?.currentDose ?? null,
+      reminderType: item?.reminderType ?? item?.type ?? item?.vaccineType ?? item?.category ?? "compulsory",
+      isTemporary: false,
     }));
   };
 
@@ -118,13 +177,71 @@ export function DashBody() {
         .map((item, index) => ({
           id: item?.id ?? `temp-reminder-${safeProfileId}-${index + 1}`,
           name: item?.vaccineName ?? "Vaccine",
+          vaccineId: item?.vaccineId ?? null,
+          dueDate: item?.dueDate ?? "",
           subtitle: item?.dueDate
             ? `Reminder set for ${item.dueDate}`
             : "Reminder set",
           status: "due",
+          totalDoses: item?.totalDoses ?? null,
+          doseNumber: item?.doseNumber ?? null,
+          reminderType: item?.reminderType ?? "compulsory",
+          isTemporary: true,
         }));
     } catch {
       return [];
+    }
+  };
+
+  const isSameReminderItem = (left, right) => {
+    if (!left || !right) return false;
+
+    const leftId = String(left?.id ?? "");
+    const rightId = String(right?.id ?? "");
+
+    if (leftId && rightId && leftId === rightId) {
+      return true;
+    }
+
+    const leftName = String(left?.name ?? left?.vaccineName ?? "").trim().toLowerCase();
+    const rightName = String(right?.name ?? right?.vaccineName ?? "").trim().toLowerCase();
+    const leftDate = String(left?.dueDate ?? "").trim();
+    const rightDate = String(right?.dueDate ?? "").trim();
+
+    return leftName && rightName && leftName === rightName && leftDate && rightDate && leftDate === rightDate;
+  };
+
+  const removeReminderFromDashboardData = (targetItem) => {
+    setDashboardData((prev) => ({
+      taken: prev.taken.filter((item) => !isSameReminderItem(item, targetItem)),
+      due: prev.due.filter((item) => !isSameReminderItem(item, targetItem)),
+      overdue: prev.overdue.filter((item) => !isSameReminderItem(item, targetItem)),
+    }));
+
+    setManuallyTakenIds((prev) => {
+      if (!prev.has(targetItem?.id)) return prev;
+      const next = new Set(prev);
+      next.delete(targetItem?.id);
+      return next;
+    });
+  };
+
+  const handleRemoveReminder = async (item) => {
+    const profileId = Number(activeProfile);
+
+    if (!Number.isFinite(profileId) || profileId <= 0) {
+      setDashboardError("Unable to remove reminder. Select a valid profile and try again.");
+      return;
+    }
+
+    try {
+      setDashboardError("");
+      await deleteProfileReminder(profileId, item);
+      removeReminderFromDashboardData(item);
+      setDashboardData((prev) => ({ ...prev }));
+      notifyDashboardRefresh();
+    } catch {
+      setDashboardError("Unable to remove reminder right now. Please try again.");
     }
   };
 
@@ -182,6 +299,44 @@ export function DashBody() {
   }, [activeProfile, profiles, setActiveProfile]);
 
   useEffect(() => {
+    const profileId = Number(activeProfile);
+
+    if (!Number.isFinite(profileId) || profileId <= 0) {
+      setManuallyTakenIds(new Set());
+      return;
+    }
+
+    try {
+      const key = `${MANUAL_TAKEN_KEY_PREFIX}:${profileId}`;
+      const raw = window.localStorage.getItem(key);
+      const parsed = JSON.parse(raw ?? "[]");
+
+      if (!Array.isArray(parsed)) {
+        setManuallyTakenIds(new Set());
+        return;
+      }
+
+      setManuallyTakenIds(new Set(parsed));
+    } catch {
+      setManuallyTakenIds(new Set());
+    }
+  }, [activeProfile]);
+
+  useEffect(() => {
+    const profileId = Number(activeProfile);
+    if (!Number.isFinite(profileId) || profileId <= 0) {
+      return;
+    }
+
+    try {
+      const key = `${MANUAL_TAKEN_KEY_PREFIX}:${profileId}`;
+      window.localStorage.setItem(key, JSON.stringify(Array.from(manuallyTakenIds)));
+    } catch {
+      return;
+    }
+  }, [activeProfile, manuallyTakenIds]);
+
+  useEffect(() => {
     let isMounted = true;
 
     const loadDashboardData = async () => {
@@ -223,15 +378,12 @@ export function DashBody() {
       const dashboardRequest = api.get(dashboardEndpoint);
       const recommendationRequest = api.get(recommendationEndpoint);
 
-      const [dashboardResult, recommendationResult] = await Promise.allSettled([
-        dashboardRequest,
-        recommendationRequest,
-      ]);
+      try {
+        const dashboardResponse = await dashboardRequest;
 
-      if (!isMounted) return;
+        if (!isMounted) return;
 
-      if (dashboardResult.status === "fulfilled") {
-        const payload = dashboardResult.value?.data?.data ?? {};
+        const payload = dashboardResponse?.data?.data ?? {};
         const normalizedDashboardData = {
           taken: normalizeStatusItems(payload?.taken),
           due: normalizeStatusItems(payload?.due),
@@ -244,14 +396,18 @@ export function DashBody() {
           due: normalizedDashboardData.due,
           overdue: normalizedDashboardData.overdue,
         });
-      } else {
+      } catch {
+        if (!isMounted) return;
         setDashboardData(buildFallbackDashboardData(selectedProfile));
         setDashboardError("Unable to load full dashboard details right now.");
       }
 
-      if (recommendationResult.status === "fulfilled") {
-        setRecommendations(normalizeRecommendations(recommendationResult.value));
-      } else {
+      try {
+        const recommendationResponse = await recommendationRequest;
+        if (!isMounted) return;
+        setRecommendations(normalizeRecommendations(recommendationResponse));
+      } catch {
+        if (!isMounted) return;
         setRecommendations([]);
       }
 
@@ -301,6 +457,76 @@ export function DashBody() {
     [dashboardDataWithTemporaryReminders]
   );
 
+  const handleToggleTaken = async (item, status) => {
+    if (status === "taken") return;
+
+    const profileId = Number(activeProfile);
+
+    if (!Number.isFinite(profileId) || profileId <= 0) {
+      return;
+    }
+
+    try {
+      const totalDoses = resolveTotalDoses(item);
+      const storedDoseProgress = getStoredDoseProgress(profileId);
+      const progressKey = item?.vaccineId ? `id:${Number(item.vaccineId)}` : `name:${normalizeVaccineKey(item?.name ?? item?.vaccineName).replace(/[^a-z0-9]/g, "")}`;
+      const completedBefore = Math.max(0, Number(storedDoseProgress?.[progressKey]) || 0);
+      const completedAfter = totalDoses > 1 ? Math.min(totalDoses, completedBefore + 1) : 1;
+      const hasRemainingDose = totalDoses > 1 && completedAfter < totalDoses;
+      const nextDueDate = hasRemainingDose ? addOneWeek(Date.now()) : item?.dueDate;
+      const nextStatus = hasRemainingDose ? "due" : "taken";
+
+      if (item?.isTemporary) {
+        updateTemporaryReminder(profileId, item.id, {
+          status: nextStatus,
+          dueDate: nextDueDate,
+          totalDoses,
+          doseNumber: Math.min(totalDoses, completedAfter + 1),
+        });
+      } else {
+        await updateProfileReminder(profileId, item.id, {
+          dueDate: nextDueDate,
+          status: nextStatus,
+          vaccineId: item?.vaccineId,
+        });
+      }
+
+      updateStoredDoseProgress(profileId, item, () => completedAfter);
+      setManuallyTakenIds((prev) => {
+        const next = new Set(prev);
+        if (nextStatus === "taken") next.add(item?.id);
+        else next.delete(item?.id);
+        return next;
+      });
+      notifyDashboardRefresh();
+    } catch {
+      setDashboardError("Unable to mark this reminder as taken right now.");
+    }
+  };
+
+  useEffect(() => {
+    if (!manuallyTakenIds.size) {
+      return;
+    }
+
+    const validIds = new Set(allDashboardItemsWithTemporaryReminders.map((item) => item?.id));
+
+    setManuallyTakenIds((previous) => {
+      let changed = false;
+      const next = new Set();
+
+      previous.forEach((id) => {
+        if (validIds.has(id)) {
+          next.add(id);
+        } else {
+          changed = true;
+        }
+      });
+
+      return changed ? next : previous;
+    });
+  }, [allDashboardItemsWithTemporaryReminders, manuallyTakenIds]);
+
   function calculateAge(birthDate) {
     if (!birthDate) return "N/A";
 
@@ -343,13 +569,129 @@ export function DashBody() {
 
   const getActionLabel = (isTaken) => (isTaken ? "Mark as Not Taken" : "Mark as Taken");
 
+  const formatDueDisplay = (value) => {
+    const raw = String(value ?? "").trim();
+    if (!raw) return "Due";
+
+    const parsed = new Date(raw);
+    if (Number.isNaN(parsed.getTime())) {
+      return "Due";
+    }
+
+    const today = new Date();
+    const dueDate = new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate());
+    const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const dayDifference = Math.round((dueDate - startOfToday) / (1000 * 60 * 60 * 24));
+
+    if (dayDifference <= 7) {
+      return `Due on ${parsed.toLocaleDateString(undefined, {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })}`;
+    }
+
+    if (dayDifference < 30) {
+      return `Due in ${dayDifference} day${dayDifference === 1 ? "" : "s"}`;
+    }
+
+    const monthDifference = Math.round(dayDifference / 30);
+    return `Due in ${monthDifference} month${monthDifference === 1 ? "" : "s"}`;
+  };
+
+  const isDueSoon = (status, dueDate) => {
+    if (String(status ?? "").trim().toLowerCase() !== "due") {
+      return false;
+    }
+
+    const parsed = new Date(String(dueDate ?? ""));
+    if (Number.isNaN(parsed.getTime())) {
+      return false;
+    }
+
+    const today = new Date();
+    const dueDay = new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate());
+    const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const dayDifference = Math.round((dueDay - startOfToday) / (1000 * 60 * 60 * 24));
+
+    return dayDifference >= 0 && dayDifference <= 7;
+  };
+
+  const isActuallyOverdue = (status, dueDate) => {
+    if (String(status ?? "").trim().toLowerCase() !== "due") return false;
+    const raw = String(dueDate ?? "").trim();
+    if (!raw) return false;
+    const parsed = new Date(raw);
+    if (Number.isNaN(parsed.getTime())) return false;
+    const now = new Date();
+    if (raw.includes("T")) {
+      return parsed.getTime() < now.getTime();
+    }
+    const endOfDueDay = new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate(), 23, 59, 59, 999);
+    return endOfDueDay.getTime() < now.getTime();
+  };
+
+  const formatOverdueSince = (value) => {
+    const raw = String(value ?? "").trim();
+    if (!raw) return "Overdue";
+    const parsed = new Date(raw);
+    if (Number.isNaN(parsed.getTime())) return "Overdue";
+    return `Overdue since ${parsed.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}`;
+  };
+
+  const effectivelyTakenItems = useMemo(() => {
+    const result = [...dashboardDataWithTemporaryReminders.taken];
+    const takenIds = new Set(result.map((item) => item.id));
+    for (const item of [
+      ...dashboardDataWithTemporaryReminders.due,
+      ...dashboardDataWithTemporaryReminders.overdue,
+    ]) {
+      if (manuallyTakenIds.has(item.id) && !takenIds.has(item.id)) {
+        takenIds.add(item.id);
+        result.push({ ...item, status: "taken" });
+      }
+    }
+    return result;
+  }, [dashboardDataWithTemporaryReminders, manuallyTakenIds]);
+
+  const effectivelyDueItems = useMemo(
+    () => dashboardDataWithTemporaryReminders.due.filter(
+      (item) => !isActuallyOverdue(item?.status, item?.dueDate) && !manuallyTakenIds.has(item.id)
+    ),
+    [dashboardDataWithTemporaryReminders, manuallyTakenIds]
+  );
+
+  const effectivelyOverdueItems = useMemo(
+    () => [
+      ...dashboardData.overdue.filter((item) => !manuallyTakenIds.has(item.id)),
+      ...dashboardDataWithTemporaryReminders.due.filter(
+        (item) => isActuallyOverdue(item?.status, item?.dueDate) && !manuallyTakenIds.has(item.id)
+      ),
+    ],
+    [dashboardData, dashboardDataWithTemporaryReminders, manuallyTakenIds]
+  );
+
   const renderDashboardCards = (items, keyPrefix, fallbackStatus) => (
     <ul className="dashboard-list">
       {items.map((item) => {
         const status = String(item?.status ?? fallbackStatus ?? "taken").toLowerCase();
-        const displayStatus = getDisplayStatus(status);
         const cardKey = `${keyPrefix}-${item.id}`;
-        const isTaken = takenToggleByCard[cardKey] ?? status === "taken";
+        const isTaken = manuallyTakenIds.has(item.id) || status === "taken";
+        const actuallyOverdue = isActuallyOverdue(status, item?.dueDate);
+        const effectiveStatus = actuallyOverdue ? "overdue" : status;
+        const resolvedStatus = isTaken ? "taken" : effectiveStatus;
+        const displayStatus = getDisplayStatus(resolvedStatus);
+        const dueSoon = resolvedStatus === "due" && isDueSoon(status, item?.dueDate);
+        const statusText = resolvedStatus === "overdue"
+          ? formatOverdueSince(item?.dueDate)
+          : resolvedStatus === "due"
+            ? formatDueDisplay(item?.dueDate)
+            : displayStatus;
+        const statusIcon = resolvedStatus === "due"
+          ? (dueSoon ? due : Btime)
+          : resolvedStatus === "overdue"
+            ? Rtime
+            : getStatusIcon(resolvedStatus);
 
         return (
           <li key={`${keyPrefix}-${item.id}`} className="dashboard-list-item">
@@ -363,9 +705,9 @@ export function DashBody() {
                 <p className="dashboard-card-subtitle">{item.subtitle}</p>
 
                 <div className="dashboard-card-footer">
-                  <div className="dashboard-card-status">
-                    <img src={getStatusIcon(status)} alt={`${displayStatus} status`} />
-                    <p>{displayStatus}</p>
+                  <div className={`dashboard-card-status${dueSoon ? " due-soon" : ""}${resolvedStatus === "overdue" ? " overdue" : ""}`}>
+                    <img src={statusIcon} alt={`${displayStatus} status`} />
+                    <p>{statusText}</p>
                   </div>
                 </div>
               </div>
@@ -374,12 +716,7 @@ export function DashBody() {
                 <button
                   type="button"
                   className="dashboard-action-btn"
-                  onClick={() => {
-                    setTakenToggleByCard((previousState) => ({
-                      ...previousState,
-                      [cardKey]: !isTaken,
-                    }));
-                  }}
+                  onClick={() => handleToggleTaken(item, status)}
                 >
                   <span
                     className={`dashboard-action-check ${isTaken ? "checked" : ""}`}
@@ -390,7 +727,11 @@ export function DashBody() {
                   <span className="dashboard-action-label">{getActionLabel(isTaken)}</span>
                 </button>
 
-                <button type="button" className="dashboard-remove-btn">
+                <button
+                  type="button"
+                  className="dashboard-remove-btn"
+                  onClick={() => handleRemoveReminder(item)}
+                >
                   Remove
                 </button>
               </div>
@@ -449,13 +790,14 @@ export function DashBody() {
 
           {profiles.map((profile) => {
             const id = profile.id; // ✅ NO index usage
+            const isInactiveProfile = profiles.length > 1 && activeProfile !== id;
 
             return (
               <div
                 key={id}
-                className="profile-summary"
+                className={`profile-summary${isInactiveProfile ? " inactive" : ""}`}
                 onClick={() =>
-                  setActiveProfile(activeProfile === id ? null : id)
+                  setActiveProfile(id)
                 }
               >
                 <div className="user-main">
@@ -518,18 +860,20 @@ export function DashBody() {
                 <div className="profile-vaccine">
                   <div className="vaccine-item">
                     <img src={taken} alt="taken vaccines" />
-                    <p>Taken ({dashboardDataWithTemporaryReminders.taken.length})</p>
+                    <p>Taken ({effectivelyTakenItems.length})</p>
                   </div>
                   <div className="vaccine-item">
                     <img src={due} alt="due vaccines" />
-                    <p>Due ({dashboardDataWithTemporaryReminders.due.length})</p>
+                    <p>Due ({effectivelyDueItems.length})</p>
                   </div>
 
                   <div className="vaccine-item">
                     <img src={overdue} alt="overdue vaccines" />
-                    <p>Overdue ({dashboardDataWithTemporaryReminders.overdue.length})</p>
+                    <p>Overdue ({effectivelyOverdueItems.length})</p>
                   </div>
                 </div>
+                {/* Chatbot icon */}
+                <img src={chatBotIcon} alt="ChatBot" className="chatbot-icon" onClick={() => setChatVisible(true)} />
               </div>
             </div>
           );
@@ -554,7 +898,7 @@ export function DashBody() {
           />
           <Button
             text="OverDue"
-            className={activeStatus === "overdue" ? "status active" : "status"}
+            className={activeStatus === "overdue" ? "status active overdue" : "status"}
             onClick={() => setActiveStatus("overdue")}
           />
         </div>
@@ -592,42 +936,43 @@ export function DashBody() {
 
           {activeStatus === "taken" && (
             <div className="dashboard-group">
-              {dashboardData.taken.length === 0 ? (
+              {effectivelyTakenItems.length === 0 ? (
                 <div className="no-vaccines-empty">
                   <p>No vaccines in this category</p>
                 </div>
               ) : (
-                renderDashboardCards(dashboardData.taken, "taken", "taken")
+                renderDashboardCards(effectivelyTakenItems, "taken", "taken")
               )}
             </div>
           )}
 
           {activeStatus === "due" && (
             <div className="dashboard-group">
-              {dashboardDataWithTemporaryReminders.due.length === 0 ? (
+              {effectivelyDueItems.length === 0 ? (
                 <div className="no-vaccines-empty">
                   <p>No vaccines in this category</p>
                 </div>
               ) : (
-                renderDashboardCards(dashboardDataWithTemporaryReminders.due, "due", "due")
+                renderDashboardCards(effectivelyDueItems, "due", "due")
               )}
             </div>
           )}
 
           {activeStatus === "overdue" && (
             <div className="dashboard-group">
-              {dashboardData.overdue.length === 0 ? (
+              {effectivelyOverdueItems.length === 0 ? (
                 <div className="no-vaccines-empty">
                   <p>No vaccines in this category</p>
                 </div>
               ) : (
-                renderDashboardCards(dashboardData.overdue, "overdue", "overdue")
+                renderDashboardCards(effectivelyOverdueItems, "overdue", "overdue")
               )}
             </div>
           )}
         </div>
-
       </div>
+      {/* ChatBot Modal */}
+      <ChatBot visible={chatVisible} onClose={() => setChatVisible(false)} />
     </div>
   );
 }

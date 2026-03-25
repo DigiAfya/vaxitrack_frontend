@@ -274,6 +274,19 @@
     border-bottom: none;
 }
 
+.vaccines-table tbody tr:hover td {
+    border-top: 2px solid #2A2A2A;
+    border-bottom: 2px solid #2A2A2A;
+}
+
+.vaccines-table tbody tr:hover td:first-child {
+    border-left: 2px solid #2A2A2A;
+}
+
+.vaccines-table tbody tr:hover td:last-child {
+    border-right: 2px solid #2A2A2A;
+}
+
 .vaccines-table thead th:first-child {
     border-top-left-radius: 20px;
 }

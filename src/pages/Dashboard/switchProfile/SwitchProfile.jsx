@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "../../Navbar/Navbar";
 import { ProfileContext } from "../../context/profileContext";
-import shield from "../../../public/pictures/image/shield.svg";
+import shield from "../../../public/pictures/image/shield.webp";
 import "../Dash-body/DashBody.css";
 import "./SwitchProfile.css";
 

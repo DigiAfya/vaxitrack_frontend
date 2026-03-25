@@ -6,7 +6,7 @@ import trackIcon from "../../public/pictures/image/track.svg";
 
 export function Solution() {
   return (
-    <div className="solution-container">
+    <div className="solution-container" id="how-it-works">
       <h2>The Solution - How VaxiTrack Works</h2>
 
       <div className="profile">

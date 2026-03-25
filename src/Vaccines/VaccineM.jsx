@@ -3,14 +3,54 @@ import './VaccineM.css';
 import Tick from '../public/pictures/Tick.svg';
 import { useEffect, useState } from 'react';
 
-export function SetReminderModal({ isOpen, vaccineName, onClose, onSetReminder }) {
+const toDateTimeLocal = (value) => {
+    const raw = String(value ?? '').trim();
+
+    if (!raw) {
+        return '';
+    }
+
+    if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(raw)) {
+        return raw;
+    }
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+        return `${raw}T09:00`;
+    }
+
+    const parsed = new Date(raw);
+    if (Number.isNaN(parsed.getTime())) {
+        return '';
+    }
+
+    const year = parsed.getFullYear();
+    const month = String(parsed.getMonth() + 1).padStart(2, '0');
+    const date = String(parsed.getDate()).padStart(2, '0');
+    const hours = String(parsed.getHours()).padStart(2, '0');
+    const minutes = String(parsed.getMinutes()).padStart(2, '0');
+
+    return `${year}-${month}-${date}T${hours}:${minutes}`;
+};
+
+export function SetReminderModal({
+    isOpen,
+    vaccineName,
+    onClose,
+    onSetReminder,
+    initialReminderDate = '',
+    title = 'Set a reminder',
+    description = 'Set a reminder ahead of time so you do not miss your vaccine date',
+    submitLabel = 'Set reminder',
+}) {
     const [reminderDate, setReminderDate] = useState('');
 
     useEffect(() => {
-        if (!isOpen) {
+        if (isOpen) {
+            setReminderDate(toDateTimeLocal(initialReminderDate));
+        } else {
             setReminderDate('');
         }
-    }, [isOpen]);
+    }, [isOpen, initialReminderDate]);
 
     if (!isOpen) {
         return null;
@@ -40,9 +80,8 @@ export function SetReminderModal({ isOpen, vaccineName, onClose, onSetReminder }
                 <div className='closeBtn'>
                     <button type="button" className="reminder-modal-close" onClick={onClose} aria-label="Close reminder modal">×</button>
                 </div>
-                <h2>Set a reminder</h2>
-                <p>Set a reminder ahead of time so you do not<br />
-                    miss your vaccine date</p>
+                <h2>{title}</h2>
+                <p>{description}</p>
                 <form onSubmit={handleSubmit} className="reminder-form">
                     <label htmlFor="vaccine-name">Vaccine name</label>
                     <input
@@ -65,7 +104,7 @@ export function SetReminderModal({ isOpen, vaccineName, onClose, onSetReminder }
                         min={getCurrentDateTimeLocal()}
                     />
 
-                    <button type="submit" id="setbtn" className="add-profile-button">Set reminder</button>
+                    <button type="submit" id="setbtn" className="add-profile-button">{submitLabel}</button>
                 </form>
             </div>
         </div>
