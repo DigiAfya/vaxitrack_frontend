@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { loginUser } from '../Api/auth';
+import { loginUser, googleLoginUser } from '../Api/auth';
 import '../General/App.css';
 import '../General/index.css';
 import './SignIn.css';
