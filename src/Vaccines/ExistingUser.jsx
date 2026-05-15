@@ -53,6 +53,10 @@ export function ExistingProfile() {
     };
 
     const normalizeDose = (value) => {
+        if (Array.isArray(value)) {
+            const count = value.length;
+            return count > 0 ? `${count} dose${count > 1 ? 's' : ''}` : 'N/A';
+        }
         if (typeof value === 'number') return `${value} dose${value > 1 ? 's' : ''}`;
         if (typeof value === 'string' && value.trim().length > 0) return value;
         return 'N/A';
@@ -67,11 +71,11 @@ export function ExistingProfile() {
 
         const categoryValue = String(item?.category ?? '').trim().toLowerCase();
 
-        if (categoryValue === 'routine' || categoryValue === 'mandatory' || categoryValue === 'compulsory') {
+        if (categoryValue === 'child' || categoryValue === 'adolescent' || categoryValue === 'routine' || categoryValue === 'mandatory' || categoryValue === 'compulsory') {
             return 'Compulsory';
         }
 
-        if (categoryValue === 'recommended' || categoryValue === 'optional') {
+        if (categoryValue === 'adult' || categoryValue === 'recommended' || categoryValue === 'optional') {
             return 'Not Compulsory';
         }
 
