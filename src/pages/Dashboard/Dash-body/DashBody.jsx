@@ -457,6 +457,23 @@ export function DashBody() {
     [dashboardDataWithTemporaryReminders]
   );
 
+  const visibleRecommendations = useMemo(() => {
+    const existingVaccineNames = new Set(
+      allDashboardItemsWithTemporaryReminders
+        .map((item) => String(item?.name ?? item?.vaccineName ?? "").trim().toLowerCase())
+        .filter(Boolean)
+    );
+
+    return recommendations.filter((item) => {
+      const name = String(item?.name ?? item?.title ?? "").trim();
+      if (!name || /^recommendation$/i.test(name)) {
+        return false;
+      }
+
+      return !existingVaccineNames.has(name.toLowerCase());
+    });
+  }, [recommendations, allDashboardItemsWithTemporaryReminders]);
+
   const handleToggleTaken = async (item, status) => {
     if (status === "taken") return;
 
@@ -918,11 +935,11 @@ export function DashBody() {
                 renderDashboardCards(allDashboardItemsWithTemporaryReminders, "all")
               )}
 
-              {recommendations.length > 0 && (
+              {allDashboardItemsWithTemporaryReminders.length > 0 && visibleRecommendations.length > 0 && (
                 <div className="dashboard-recommendations">
                   <p>Recommendations</p>
                   <ul className="dashboard-list">
-                    {recommendations.map((item) => (
+                    {visibleRecommendations.map((item) => (
                       <li key={`recommend-${item.id}`} className="dashboard-list-item">
                         <h3>{item.name}</h3>
                         <p>{item.subtitle}</p>
